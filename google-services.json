@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "199309026780",
+    "project_id": "naimaa-40264",
+    "storage_bucket": "naimaa-40264.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199309026780:android:2f8d336b2ef9a2e5ba9b19",
+        "android_client_info": {
+          "package_name": "mn.naimaa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199309026780-6v0fu1gni705ftbnq87pi09otoiivjh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkHWBCYIdIBNC6iA4IwV_7Gv89ppAldyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199309026780-6v0fu1gni705ftbnq87pi09otoiivjh1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

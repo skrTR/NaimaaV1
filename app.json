@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "Naimaa",
+    "slug": "Naimaa-naimaa",
+    "version": "0.0.6",
+    "orientation": "portrait",
+    "icon": "./assets/ioslogo.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "mn.naimaas",
+      "buildNumber": "0.0.6",
+      "entitlements": {
+        "com.apple.developer.networking.wifi-info": true
+      }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ],
+    "android": {
+      "versionCode": 6,
+      "package": "mn.naimaa",
+      "permissions": [ "CAMERA", "WRITE_EXTERNAL_STORAGE", "CAMERA_ROLL" ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/androidlogo.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    }
+  
+  }
+}
