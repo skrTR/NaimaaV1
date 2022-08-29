@@ -7,6 +7,8 @@ import {
   Alert,
   Image,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -236,7 +238,10 @@ const AddProductModal = () => {
     return <Spinner />;
   }
   return (
-    <>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1, backgroundColor: "white" }}
+    >
       <ScrollView
         style={{
           margin: 20,
@@ -466,7 +471,7 @@ const AddProductModal = () => {
         setQuantityModal={setQuantityModal}
         setProductQuantity={setProductQuantity}
       />
-    </>
+    </KeyboardAvoidingView>
   );
 };
 

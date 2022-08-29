@@ -19,7 +19,6 @@ const HalfLoanModal = (props) => {
         amount: loanSize,
       })
       .then((res) => {
-        console.log(res.data);
         setLoanModal(!loanModal);
       })
       .catch((err) => {

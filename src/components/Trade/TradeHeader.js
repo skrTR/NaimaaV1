@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const TradeHeader = ({ enabled, changeEnabled }) => {
   const state = useContext(UserContext);
-  const navigation = useNavigation("ProfileScreen");
+  const navigation = useNavigation("RegisterScreen");
   return (
     <View
       style={{
@@ -30,15 +30,13 @@ const TradeHeader = ({ enabled, changeEnabled }) => {
         />
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ProfileScreen")}
+            onPress={() => navigation.navigate("RegisterScreen")}
           >
-            <Text
-              style={{ color: "white", fontWeight: "bold", marginRight: 20 }}
-            >
+            <Text style={{ color: "white", fontWeight: "bold" }}>
               {state.phone}
             </Text>
           </TouchableOpacity>
-          <Ionicons name="md-notifications-outline" size={24} color="white" />
+          {/* <Ionicons name="md-notifications-outline" size={24} color="white" /> */}
         </View>
       </View>
       {/* Orlogo zarlaga */}

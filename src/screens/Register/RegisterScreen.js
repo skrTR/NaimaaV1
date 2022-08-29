@@ -44,7 +44,7 @@ const RegisterScreen = () => {
           source={require("../../../assets/logo.png")}
           style={{ resizeMode: "contain", height: 50, width: 50 }}
         />
-        <Ionicons name="md-notifications-outline" size={28} color="black" />
+        {/* <Ionicons name="md-notifications-outline" size={28} color="black" /> */}
       </View>
       <View style={{ borderWidth: 1, borderColor: "#cccccccc" }} />
       <Image
@@ -88,13 +88,33 @@ const RegisterScreen = () => {
         }}
       />
       <TouchableOpacity
-        onPress={logout}
+        onPress={() => alert("Тун удахгүй")}
         style={{
           flexDirection: "row",
           alignItems: "center",
           marginHorizontal: 10,
           alignContent: "center",
           marginBottom: 5,
+        }}
+      >
+        <MaterialIcons name="security" size={24} color="black" />
+        <Text style={{ fontWeight: "600", fontSize: 15 }}> Нууц үг солих</Text>
+      </TouchableOpacity>
+      <View
+        style={{
+          borderWidth: 1,
+          borderColor: "#cccccccc",
+          marginHorizontal: 10,
+        }}
+      />
+      <TouchableOpacity
+        onPress={logout}
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          marginHorizontal: 10,
+          alignContent: "center",
+          marginVertical: 5,
         }}
       >
         <MaterialIcons name="logout" size={24} color="black" />

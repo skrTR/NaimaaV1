@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import MyBackButton from "../components/MyBackButton";
-import ProfileScreen from "../screens/Auth/ProfileScreen";
 import ProductDetailScreen from "../screens/List/ProductDetailScreen";
 import ProductEditModal from "../screens/List/ProductEditModal";
 import AddProductModal from "../screens/Trade/AddProductModal";
@@ -67,15 +66,6 @@ const TradeStack = () => {
           presentation: "formSheet",
           title: "Бараа засах",
           headerLeft: () => <MyBackButton />,
-        }}
-      />
-      <TradeStack.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
-        options={{
-          title: "Профайл",
-          headerLeft: () => <MyBackButton />,
-          headerShown: false,
         }}
       />
     </TradeStack.Navigator>

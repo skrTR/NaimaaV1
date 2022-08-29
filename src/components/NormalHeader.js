@@ -29,15 +29,13 @@ const NormalHeader = () => {
         />
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ProfileScreen")}
+            onPress={() => navigation.navigate("RegisterScreen")}
           >
-            <Text
-              style={{ color: "white", fontWeight: "bold", marginRight: 20 }}
-            >
+            <Text style={{ color: "white", fontWeight: "bold" }}>
               {state.phone}
             </Text>
           </TouchableOpacity>
-          <Ionicons name="md-notifications-outline" size={24} color="white" />
+          {/* <Ionicons name="md-notifications-outline" size={24} color="white" /> */}
         </View>
       </View>
     </SafeAreaView>

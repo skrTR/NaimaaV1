@@ -9,13 +9,16 @@ const LoanInfoModal = (props) => {
   const { id } = props.route.params;
   const [loanModal, setLoanModal] = useState(false);
   const [data, setData] = useState([]);
-
+  const [debt, setDebt] = useState([]);
+  const [history, setHistory] = useState([]);
   const getData = () => {
     axios
       .get(`${api}/api/v1/bills/${id}`)
       .then((res) => {
         setData(res.data.data);
-        console.log(res.data);
+        console.log(res.data.data);
+        setHistory(res.data.data.deptHistory);
+        setDebt(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -34,20 +37,38 @@ const LoanInfoModal = (props) => {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel",
         },
-        { text: "Тийм", onPress: () => console.log("OK Pressed") },
+        {
+          text: "Тийм",
+          onPress: () => {
+            axios
+              .post(`${api}/api/v1/bills/debt/${id}`, {
+                amount: data.loanSize ? data.loanSize : 0,
+              })
+              .then((res) => {
+                console.log(res.data.data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          },
+        },
       ]
     );
   };
-  const deleteLoanData = (id) => {
+  const deleteLoanData = (billId) => {
     Alert.alert(
       "Та устгахдаа итгэлтэй байна уу?",
       "Таны зээлийн тайланд зээл хасагдахыг анхаарна уу!",
       [
         {
           text: "Буцах",
+          style: "cancel",
+        },
+        {
+          text: "Тийм",
           onPress: () => {
             axios
-              .post(`${api}/api/v1/bills/debt/${id}`)
+              .delete(`${api}/api/v1/bills/debt/${id}/${billId}`)
               .then((res) => {
                 console.log(res.data);
               })
@@ -55,9 +76,7 @@ const LoanInfoModal = (props) => {
                 console.log(err);
               });
           },
-          style: "cancel",
         },
-        { text: "Тийм", onPress: () => console.log("OK Pressed") },
       ]
     );
   };
@@ -139,7 +158,7 @@ const LoanInfoModal = (props) => {
         />
         <View style={{ flexDirection: "row" }}>
           <Text style={{ fontWeight: "bold", fontSize: 16 }}>
-            Зээл буцаан олгох үлдсэн хугацаа:{" "}
+            Зээл төлөхөд үлдсэн хугацаа:{" "}
           </Text>
           <Text style={{ fontWeight: "300", fontSize: 15 }}>
             {moment(data.createdAt).fromNow()}{" "}
@@ -253,52 +272,88 @@ const LoanInfoModal = (props) => {
         </TouchableOpacity>
       </View>
       {/* Zeeliin tailan */}
-      <Text style={{ fontSize: 20, fontWeight: "bold", marginVertical: 10 }}>
-        Зээл төлсөн дэлгэрэнгүй
-      </Text>
+
       <ScrollView>
-        <View
-          style={{
-            marginTop: 5,
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <View>
-            <Text style={{ fontWeight: "700", fontSize: 16 }}>
-              Төлсөн хугацаа:{" "}
-              <Text style={{ fontWeight: "300", fontSize: 16 }}>
-                2022/08/20
-              </Text>
-            </Text>
-            <Text
-              style={{ fontWeight: "700", fontSize: 16, marginVertical: 5 }}
-            >
-              Төлсөн дүн:{" "}
-              <Text style={{ fontWeight: "300", fontSize: 16 }}>
-                3,500,000₮
-              </Text>
-            </Text>
-            <Text style={{ fontWeight: "700", fontSize: 16, marginBottom: 5 }}>
-              Зээлийн үлдэгдэл:{" "}
-              <Text style={{ fontWeight: "300", fontSize: 16 }}>
-                1,500,000₮
-              </Text>
-            </Text>
-          </View>
-          <View
-            style={{
-              alignItems: "center",
-              alignContent: "center",
-              alignSelf: "center",
-            }}
-          >
-            <TouchableOpacity onPress={deleteLoanData}>
-              <EvilIcons name="trash" size={35} color="red" />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={{ borderWidth: 1, borderColor: "#cccccccc" }} />
+        {history &&
+          history.map((e) => {
+            return (
+              <View key={e._id}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    marginVertical: 10,
+                  }}
+                >
+                  Зээл төлсөн дэлгэрэнгүй
+                </Text>
+                <View
+                  style={{
+                    marginTop: 5,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <View>
+                    <Text style={{ fontWeight: "700", fontSize: 16 }}>
+                      Төлсөн хугацаа:{" "}
+                      <Text style={{ fontWeight: "300", fontSize: 16 }}>
+                        {moment(e.createdAt).format("YYYY/MM/DD")}
+                      </Text>
+                    </Text>
+                    <Text
+                      style={{
+                        fontWeight: "700",
+                        fontSize: 16,
+                        marginVertical: 5,
+                      }}
+                    >
+                      Төлсөн дүн:{" "}
+                      <Text style={{ fontWeight: "300", fontSize: 16 }}>
+                        {e.amount}₮
+                      </Text>
+                    </Text>
+                    <Text
+                      style={{
+                        fontWeight: "700",
+                        fontSize: 16,
+                        marginBottom: 5,
+                      }}
+                    >
+                      Анхны үлдэгдэл:{" "}
+                      <Text style={{ fontWeight: "300", fontSize: 16 }}>
+                        {e.before}₮
+                      </Text>
+                    </Text>
+                    <Text
+                      style={{
+                        fontWeight: "700",
+                        fontSize: 16,
+                        marginBottom: 5,
+                      }}
+                    >
+                      Үлдэгдэл:{" "}
+                      <Text style={{ fontWeight: "300", fontSize: 16 }}>
+                        {e.before - e.amount}₮
+                      </Text>
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      alignItems: "center",
+                      alignContent: "center",
+                      alignSelf: "center",
+                    }}
+                  >
+                    <TouchableOpacity onPress={() => deleteLoanData(e._id)}>
+                      <EvilIcons name="trash" size={35} color="red" />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={{ borderWidth: 1, borderColor: "#cccccccc" }} />
+              </View>
+            );
+          })}
       </ScrollView>
       {/* Niit or zeel */}
       <View
@@ -319,7 +374,7 @@ const LoanInfoModal = (props) => {
           }}
         >
           <Text style={{ fontWeight: "700" }}>
-            Нийт өр:<Text style={{ fontWeight: "400" }}> 50,000,000₮</Text>
+            Нийт өр:<Text style={{ fontWeight: "400" }}> {debt.dept}₮</Text>
           </Text>
         </View>
         <View
@@ -331,7 +386,7 @@ const LoanInfoModal = (props) => {
         >
           <Text style={{ fontWeight: "700" }}>
             Нийт авлага:
-            <Text style={{ fontWeight: "400" }}> 50,000,000₮</Text>
+            <Text style={{ fontWeight: "400" }}> {debt.receipt}₮</Text>
           </Text>
         </View>
       </View>
