@@ -38,9 +38,15 @@ const ResultedProduct = (props) => {
       <DataTable>
         {/* Table headeer */}
         <DataTable.Header>
-          <DataTable.Title>Барааны нэр</DataTable.Title>
-          <DataTable.Title numeric>Үнэ</DataTable.Title>
-          <DataTable.Title numeric>Хэмжээ</DataTable.Title>
+          <DataTable.Title textStyle={{ fontSize: 14 }}>
+            Барааны нэр
+          </DataTable.Title>
+          <DataTable.Title numeric textStyle={{ fontSize: 14 }}>
+            Үнэ
+          </DataTable.Title>
+          <DataTable.Title numeric textStyle={{ fontSize: 14 }}>
+            Хэмжээ
+          </DataTable.Title>
           <DataTable.Title numeric></DataTable.Title>
         </DataTable.Header>
         {/* Table data */}
@@ -49,8 +55,8 @@ const ResultedProduct = (props) => {
             return (
               <View key={e._id}>
                 <DataTable.Row>
-                  <DataTable.Cell>
-                    <AntDesign name="staro" size={15} color="#FF9B05" />
+                  <DataTable.Cell textStyle={{ fontSize: 16 }}>
+                    {/* <AntDesign name="staro" size={15} color="#FF9B05" /> */}
                     {/* <AntDesign name="star" size={24} color="black" /> */}
                     {e.name}
                   </DataTable.Cell>
@@ -63,20 +69,23 @@ const ResultedProduct = (props) => {
                         })
                       }
                     >
-                      <Text>{e.price}</Text>
+                      <Text style={{ fontSize: 16 }}>{e.price}₮</Text>
                     </TouchableOpacity>
                   </DataTable.Cell>
                   <DataTable.Cell numeric>
                     <TouchableOpacity
-                      style={{ flexDirection: "row", alignItems: "center" }}
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                      }}
                       onPress={() =>
                         navigation.navigate("ProductDetailScreen", {
                           id: e._id,
                         })
                       }
                     >
-                      <Text>{e.quantity}</Text>
-                      <Text>{e.unit}</Text>
+                      <Text style={{ fontSize: 16 }}>{e.quantity}</Text>
+                      <Text style={{ fontSize: 16 }}>{e.unit.slice(0, 2)}</Text>
                     </TouchableOpacity>
                   </DataTable.Cell>
                   <DataTable.Cell style={{ left: 10 }}>
@@ -85,7 +94,9 @@ const ResultedProduct = (props) => {
                         <TouchableOpacity
                           style={{
                             backgroundColor: "red",
-                            padding: 3,
+                            alignItems: "center",
+                            justifyContent: "center",
+                            padding: 5,
                           }}
                           onPress={() => {
                             setGood(e._id);
@@ -94,13 +105,15 @@ const ResultedProduct = (props) => {
                             setPriceModal(true);
                           }}
                         >
-                          <AntDesign name="minus" size={15} color="white" />
+                          <AntDesign name="minus" size={22} color="white" />
                         </TouchableOpacity>
                       ) : (
                         <TouchableOpacity
                           style={{
                             backgroundColor: "#175E26",
-                            padding: 3,
+                            alignItems: "center",
+                            justifyContent: "center",
+                            padding: 5,
                           }}
                           onPress={() => {
                             setGood(e._id);
@@ -109,15 +122,17 @@ const ResultedProduct = (props) => {
                             setPriceModal(true);
                           }}
                         >
-                          <AntDesign name="plus" size={15} color="white" />
+                          <AntDesign name="plus" size={20} color="white" />
                         </TouchableOpacity>
                       )}
 
                       <TouchableOpacity
                         style={{
                           backgroundColor: "grey",
-                          padding: 3,
+                          padding: 8,
                           marginLeft: 5,
+                          justifyContent: "center",
+                          alignItems: "center",
                         }}
                         onPress={() =>
                           navigation.navigate("ProductDetailScreen", {
@@ -127,7 +142,7 @@ const ResultedProduct = (props) => {
                       >
                         <FontAwesome
                           name="angle-double-right"
-                          size={15}
+                          size={20}
                           color="white"
                         />
                       </TouchableOpacity>
@@ -145,7 +160,7 @@ const ResultedProduct = (props) => {
                 >
                   <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                      <Text style={{ fontWeight: "bold", fontSize: 16 }}>
+                      <Text style={{ fontWeight: "bold", fontSize: 18 }}>
                         Үнэ
                       </Text>
                       <TextInput
@@ -155,6 +170,7 @@ const ResultedProduct = (props) => {
                           borderWidth: 1,
                           padding: 3,
                           borderColor: "#CCCCCC",
+                          fontSize: 16,
                         }}
                         placeholderTextColor={"grey"}
                         // value={codePrice.price && codePrice.price.toString()}
@@ -167,6 +183,7 @@ const ResultedProduct = (props) => {
                           fontWeight: "bold",
                           fontSize: 16,
                           marginTop: 10,
+                          fontSize: 18,
                         }}
                       >
                         Хэмжээ
@@ -177,6 +194,7 @@ const ResultedProduct = (props) => {
                           borderWidth: 1,
                           padding: 3,
                           borderColor: "#CCCCCC",
+                          fontSize: 16,
                         }}
                         placeholderTextColor={"grey"}
                         value={quantity.toString()}
@@ -191,7 +209,9 @@ const ResultedProduct = (props) => {
                           setPriceModal(!priceModal);
                         }}
                       >
-                        <Text style={styles.textStyle}>Болсон</Text>
+                        <Text style={[styles.textStyle, { fontSize: 18 }]}>
+                          Болсон
+                        </Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         onPress={() => setPriceModal(!priceModal)}

@@ -62,6 +62,7 @@ const ListScreen = (props) => {
             borderColor: "#c4c4c4",
             padding: 10,
             marginTop: 10,
+            fontSize: 18,
           }}
           value={search}
           onChangeText={(text) => searchFilter(text)}
@@ -70,9 +71,15 @@ const ListScreen = (props) => {
           <DataTable>
             {/* Table headeer */}
             <DataTable.Header>
-              <DataTable.Title>Барааны нэр</DataTable.Title>
-              <DataTable.Title numeric>Үнэ</DataTable.Title>
-              <DataTable.Title numeric>Хэмжээ</DataTable.Title>
+              <DataTable.Title textStyle={{ fontSize: 15 }}>
+                Барааны нэр
+              </DataTable.Title>
+              <DataTable.Title numeric textStyle={{ fontSize: 15 }}>
+                Үнэ
+              </DataTable.Title>
+              <DataTable.Title numeric textStyle={{ fontSize: 15 }}>
+                Хэмжээ
+              </DataTable.Title>
             </DataTable.Header>
             {/* Table data */}
             {filterData &&
@@ -85,15 +92,15 @@ const ListScreen = (props) => {
                     }
                   >
                     <DataTable.Row>
-                      <DataTable.Cell>
-                        <AntDesign name="staro" size={15} color="#FF9B05" />
-                        {/* <AntDesign name="star" size={24} color="black" /> */}
+                      <DataTable.Cell textStyle={{ fontSize: 16 }}>
                         {e.name}
                       </DataTable.Cell>
-                      <DataTable.Cell numeric>{e.price}</DataTable.Cell>
-                      <DataTable.Cell numeric>
+                      <DataTable.Cell numeric textStyle={{ fontSize: 16 }}>
+                        {e.price}
+                      </DataTable.Cell>
+                      <DataTable.Cell numeric textStyle={{ fontSize: 16 }}>
                         {e.quantity}
-                        {e.unit}
+                        {e.unit.slice(0, 2)}
                       </DataTable.Cell>
                     </DataTable.Row>
                   </TouchableOpacity>

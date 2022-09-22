@@ -85,6 +85,7 @@ const IncomeBarCodeSearch = (props) => {
           padding: 10,
           width: "100%",
           ...props.style,
+          fontSize: 16,
         }}
         value={barcode}
         onChangeText={setBarcode}

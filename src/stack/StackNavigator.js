@@ -12,6 +12,10 @@ import SignUpScreen from "../screens/Auth/SignUpScreen";
 import UserContext from "../context/UserContex";
 import ListStack from "./ListStack";
 import SplashScreen from "../screens/SplashScreen";
+import SignUpScreen2 from "../screens/Auth/SignUpScreen2";
+import AfterLoginScreen from "../screens/Auth/AfterLoginScreen";
+import ResetPassword from "../screens/Auth/ResetPassword";
+import ResetPassword2 from "../screens/Auth/ResetPassword2";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -81,12 +85,32 @@ const StackNavigator = () => {
           <Stack.Screen
             name="LoginScreen"
             component={LoginScreen}
-            options={{ headerShown: false }}
+            options={{ headerShown: false, fullScreenGestureEnabled: true }}
           />
           <Stack.Screen
             name="SignUpScreen"
             component={SignUpScreen}
-            options={{ headerShown: false }}
+            options={{ headerShown: false, fullScreenGestureEnabled: true }}
+          />
+          <Stack.Screen
+            name="SignUpScreen2"
+            component={SignUpScreen2}
+            options={{ headerShown: false, fullScreenGestureEnabled: true }}
+          />
+          <Stack.Screen
+            name="AfterLoginScreen"
+            component={AfterLoginScreen}
+            options={{ headerShown: false, fullScreenGestureEnabled: true }}
+          />
+          <Stack.Screen
+            name="ResetPassword"
+            component={ResetPassword}
+            options={{ headerShown: false, fullScreenGestureEnabled: true }}
+          />
+          <Stack.Screen
+            name="ResetPassword2"
+            component={ResetPassword2}
+            options={{ headerShown: false, fullScreenGestureEnabled: true }}
           />
         </Stack.Navigator>
       )}

@@ -1,4 +1,11 @@
-import { StyleSheet, Text, TouchableOpacity, Modal, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Modal,
+  View,
+  ScrollView,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { Entypo, Ionicons } from "@expo/vector-icons";
 import axios from "axios";
@@ -12,6 +19,7 @@ const TradeCategory = (props) => {
       .get(`${api}/api/v1/categories`)
       .then((res) => {
         setCategoryData(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -32,10 +40,12 @@ const TradeCategory = (props) => {
         }}
         onPress={() => setCategoryModal(true)}
       >
-        <Text style={{ color: "#c4c4c4", padding: 10 }}>
+        <Text style={{ color: "#c4c4c4", padding: 10, fontSize: 16 }}>
           {category ? category : "Категори"}
         </Text>
-        <Entypo name="chevron-thin-down" size={15} color={"#c4c4c4"} />
+        {!category && (
+          <Entypo name="chevron-thin-down" size={15} color={"#c4c4c4"} />
+        )}
       </TouchableOpacity>
       <Modal
         animationType="slide"
@@ -58,18 +68,22 @@ const TradeCategory = (props) => {
               >
                 Категори сонгох
               </Text>
-              {categoryData.map((e) => {
-                <TouchableOpacity
-                  onPress={() => {
-                    setCategory(e.name);
-                    setCategoryModal(false);
-                  }}
-                  key={e._id}
-                >
-                  <Text style={styles.categoryText}>{e.name}1!!!</Text>
-                  <View style={styles.borderLine} />
-                </TouchableOpacity>;
-              })}
+              <ScrollView>
+                {categoryData.map((e) => {
+                  return (
+                    <TouchableOpacity
+                      onPress={() => {
+                        setCategory(e.name);
+                        setCategoryModal(false);
+                      }}
+                      key={e._id}
+                    >
+                      <Text style={styles.categoryText}>{e.name}</Text>
+                      <View style={styles.borderLine} />
+                    </TouchableOpacity>
+                  );
+                })}
+              </ScrollView>
             </View>
             <TouchableOpacity
               onPress={() => setCategoryModal(!categoryModal)}
@@ -92,7 +106,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
-    height: "40%",
+    height: "90%",
   },
   modalView1: {
     backgroundColor: "white",

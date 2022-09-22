@@ -245,6 +245,7 @@ const AddProductModal = () => {
       <ScrollView
         style={{
           margin: 20,
+          flex: 1,
           opacity: modalVisible
             ? 0.1
             : cameraModal
@@ -267,9 +268,11 @@ const AddProductModal = () => {
           onPress={() => setCategoryModal(true)}
         >
           {categoryName ? (
-            <Text style={{ padding: 5 }}>{categoryName}</Text>
+            <Text style={{ padding: 5, fontSize: 16 }}>{categoryName}</Text>
           ) : (
-            <Text style={{ padding: 5, color: "grey" }}>Категори сонгох</Text>
+            <Text style={{ padding: 5, color: "grey", fontSize: 16 }}>
+              Категори сонгох
+            </Text>
           )}
 
           <Entypo
@@ -282,7 +285,7 @@ const AddProductModal = () => {
         <Text style={styles.titleText}>Бараа нэр</Text>
         <TextInput
           placeholder="Бүтээгдэхүүний нэр"
-          style={{ borderWidth: 1, padding: 5 }}
+          style={{ borderWidth: 1, padding: 5, fontSize: 16 }}
           placeholderTextColor={"grey"}
           value={productName}
           onChangeText={setProductName}
@@ -291,7 +294,7 @@ const AddProductModal = () => {
         <TextInput
           placeholder="Үнийн дүнгээ бичнэ үү"
           placeholderTextColor={"grey"}
-          style={{ borderWidth: 1, padding: 5 }}
+          style={{ borderWidth: 1, padding: 5, fontSize: 16 }}
           value={productPrice.toString()}
           onChangeText={setProductPrice}
         />
@@ -306,9 +309,9 @@ const AddProductModal = () => {
           onPress={() => setQuantityModal(true)}
         >
           {productQuantity ? (
-            <Text style={{ padding: 5 }}>{productQuantity}</Text>
+            <Text style={{ padding: 5, fontSize: 16 }}>{productQuantity}</Text>
           ) : (
-            <Text style={{ padding: 5, color: "grey" }}>
+            <Text style={{ padding: 5, color: "grey", fontSize: 16 }}>
               Хэмжих нэгж сонгоно уу
             </Text>
           )}
@@ -325,7 +328,7 @@ const AddProductModal = () => {
           multiline
           numberOfLines={10}
           placeholder={"Тэмдэглэл"}
-          style={{ borderWidth: 1, padding: 5 }}
+          style={{ borderWidth: 1, padding: 5, fontSize: 16 }}
           value={productNote}
           onChangeText={setProductNote}
         />
@@ -439,6 +442,7 @@ const AddProductModal = () => {
             Баталгаажуулах
           </Text>
         </TouchableOpacity>
+        <View style={{ marginBottom: 200 }} />
       </ScrollView>
       {/*Bar code Modal */}
       <BarcodeModal
@@ -480,7 +484,7 @@ export default AddProductModal;
 const styles = StyleSheet.create({
   titleText: {
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 18,
     marginVertical: 5,
   },
 });

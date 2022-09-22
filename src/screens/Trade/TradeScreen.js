@@ -113,7 +113,7 @@ const TradeScreen = () => {
                 }}
                 onPress={() => navigation.navigate("SearchByPhoto")}
               >
-                <Ionicons name="images-outline" size={20} color="black" />
+                <Ionicons name="images-outline" size={25} color="black" />
               </TouchableOpacity>
             </View>
             {!enabled && (
@@ -127,7 +127,9 @@ const TradeScreen = () => {
                 }}
                 onPress={() => navigation.navigate("AddProductModal")}
               >
-                <Text style={{ color: "white" }}>Бараа бүртгэх</Text>
+                <Text style={{ color: "white", fontSize: 18 }}>
+                  Бараа бүртгэх
+                </Text>
               </TouchableOpacity>
             )}
           </View>
@@ -200,7 +202,9 @@ const TradeScreen = () => {
                 }}
                 onPress={() => setDrainModal(true)}
               >
-                <Text style={{ color: "white" }}>Зарлага гаргах</Text>
+                <Text style={{ color: "white", fontSize: 18 }}>
+                  Зарлага гаргах
+                </Text>
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
@@ -218,7 +222,9 @@ const TradeScreen = () => {
                 }}
                 onPress={() => setLoanModal(true)}
               >
-                <Text style={{ color: "white" }}>Орлого авах</Text>
+                <Text style={{ color: "white", fontSize: 18 }}>
+                  Орлого авах
+                </Text>
               </TouchableOpacity>
             )}
           </>

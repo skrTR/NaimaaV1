@@ -12,7 +12,7 @@ import axios from "axios";
 import { api } from "../../../Constants";
 const GetProductModal = (props) => {
   const { loanModal, setLoanModal, setRefresh } = props;
-  const [isLoan, setIsLoan] = useState(false);
+  const [isLoan, setIsLoan] = useState(1);
   const [isTemplate, setIsTemplate] = useState(false);
   const [templateName, setTemplateName] = useState("");
   const [loanName, setLoanName] = useState("");
@@ -33,6 +33,27 @@ const GetProductModal = (props) => {
     }
     axios
       .post(`${api}/api/v1/bills/receipt`, { incomeType: "Бэлэн" })
+      .then((res) => {
+        setRefresh(true);
+        setLoanModal(!loanModal);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const postIncomeOnline = () => {
+    if (isTemplate) {
+      axios
+        .post(`${api}/api/v1/templates`, { name: templateName })
+        .then((res) => {
+          console.log(res.data.data, "template");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    axios
+      .post(`${api}/api/v1/bills/receipt`, { incomeType: "Бэлэн бус" })
       .then((res) => {
         setRefresh(true);
         setLoanModal(!loanModal);
@@ -94,28 +115,69 @@ const GetProductModal = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setIsLoan(false)}
+              onPress={() => setIsLoan(1)}
             >
               <MaterialCommunityIcons
-                name={isLoan ? "checkbox-blank-outline" : "checkbox-marked"}
+                name={
+                  isLoan === 1 ? "checkbox-marked" : "checkbox-blank-outline"
+                }
                 size={24}
                 color="black"
               />
-              <Text>Бэлэнээр</Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: isLoan === 1 ? "700" : "500",
+                }}
+              >
+                Бэлнээр{" "}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setIsLoan(true)}
+              onPress={() => setIsLoan(2)}
             >
               <MaterialCommunityIcons
-                name={!isLoan ? "checkbox-blank-outline" : "checkbox-marked"}
+                name={
+                  isLoan === 2 ? "checkbox-marked" : "checkbox-blank-outline"
+                }
                 size={24}
                 color="black"
               />
-              <Text>Зээлээр</Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: isLoan === 2 ? "700" : "500",
+                }}
+              >
+                Бэлэн бус
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => setIsLoan(3)}
+            >
+              <MaterialCommunityIcons
+                name={
+                  isLoan === 3 ? "checkbox-marked" : "checkbox-blank-outline"
+                }
+                size={24}
+                color="black"
+              />
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: isLoan === 3 ? "700" : "500",
+                }}
+              >
+                Зээлээр
+              </Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -152,7 +214,7 @@ const GetProductModal = (props) => {
               />
             </View>
           )}
-          {isLoan && (
+          {isLoan === 3 && (
             <View style={{ marginTop: 10 }}>
               <Text style={{ fontWeight: "bold", fontSize: 16 }}>
                 Зээлдэгчийн нэр
@@ -232,9 +294,15 @@ const GetProductModal = (props) => {
           )}
           <TouchableOpacity
             style={[styles.button, styles.buttonClose]}
-            onPress={isLoan ? postLoanIncome : postIncome}
+            onPress={
+              isLoan === 1
+                ? postLoanIncome
+                : isLoan === 2
+                ? postIncome
+                : isLoan === 3 && postIncomeOnline
+            }
           >
-            <Text style={styles.textStyle}>Болсон</Text>
+            <Text style={[styles.textStyle, { fontSize: 16 }]}>Болсон</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setLoanModal(!loanModal)}
@@ -289,7 +357,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    marginTop: 10,
+    marginTop: 30,
   },
   buttonClose: {
     backgroundColor: "#175E26",

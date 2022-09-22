@@ -25,7 +25,7 @@ const ReportScreen = () => {
             fontWeight: "bold",
           }}
         >
-          Орлогын тайлан
+          Орлогын гүйлгээний жагсаалт
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -46,7 +46,7 @@ const ReportScreen = () => {
             fontWeight: "bold",
           }}
         >
-          Зарлагын тайлан
+          Зарлагын гүйлгээний тайлан
         </Text>
       </TouchableOpacity>
       <TouchableOpacity

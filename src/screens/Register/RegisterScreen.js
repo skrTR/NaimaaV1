@@ -17,7 +17,7 @@ const RegisterScreen = () => {
     axios
       .get(`${api}/api/v1/users/${state.userId}`)
       .then((res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         // console.log(err);

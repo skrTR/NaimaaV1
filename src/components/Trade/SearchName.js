@@ -46,6 +46,7 @@ const SearchName = (props) => {
           borderWidth: 1,
           borderColor: "#c4c4c4",
           padding: 10,
+          fontSize: 16,
         }}
         value={search}
         onChangeText={(text) => searchFilter(text)}
