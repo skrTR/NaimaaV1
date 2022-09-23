@@ -58,7 +58,7 @@ const AddProductModal = () => {
         setCategory(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   }, []);
   const sendData = () => {
@@ -131,7 +131,7 @@ const AddProductModal = () => {
             // console.log(res.data.data, "in");
           })
           .catch((err) => {
-            console.log(err);
+            //console.log(err);
           });
         setLoader(false);
         navigation.goBack();

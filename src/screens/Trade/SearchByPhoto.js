@@ -16,7 +16,7 @@ const SearchByPhoto = () => {
         setPhoto(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   useEffect(() => {

@@ -15,7 +15,7 @@ const AllReportScreen = () => {
         setData(res.data.goodsReceipts);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   useEffect(() => {

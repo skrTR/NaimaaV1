@@ -22,7 +22,7 @@ const HalfLoanModal = (props) => {
         setLoanModal(!loanModal);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   return (

@@ -19,10 +19,9 @@ const TradeCategory = (props) => {
       .get(`${api}/api/v1/categories`)
       .then((res) => {
         setCategoryData(res.data.data);
-        console.log(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   useEffect(() => {

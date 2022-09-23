@@ -5,7 +5,6 @@ import UserContext from "../context/UserContex";
 
 const SplashScreen = () => {
   const state = useContext(UserContext);
-  console.log(state);
   useEffect(() => {
     AsyncStorage.getItem("user")
       .then((data) => {

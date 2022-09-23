@@ -20,12 +20,12 @@ const SignUpScreen = () => {
   const state = useContext(UserContext);
   const navigation = useNavigation();
   const [reading, setReading] = useState(false);
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [password1, setPassword1] = useState("");
+  const [phone, setPhone] = useState("95040448");
+  const [password, setPassword] = useState("123456");
+  const [password1, setPassword1] = useState("123456");
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("gg@gg.com");
   const [isSecure, setIsSecure] = useState(true);
   const login = () => {
     if (phone.length < 6) {
@@ -56,9 +56,7 @@ const SignUpScreen = () => {
   const sendMessage = () => {
     axios
       .post(`${api}/api/v1/users/send`, { phone: phone })
-      .then((res) => {
-        console.log(res.data);
-      })
+      .then((res) => {})
       .catch((err) => {
         Alert.alert(err.response.data.error.message);
         navigation.goBack();

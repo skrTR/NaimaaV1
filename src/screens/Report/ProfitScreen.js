@@ -15,7 +15,7 @@ const ProfitScreen = () => {
         setData(res.data.goodsMargins);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   useEffect(() => {

@@ -16,12 +16,11 @@ const LoanInfoModal = (props) => {
       .get(`${api}/api/v1/bills/${id}`)
       .then((res) => {
         setData(res.data.data);
-        console.log(res.data.data);
         setHistory(res.data.data.deptHistory);
         setDebt(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   useEffect(() => {
@@ -48,7 +47,7 @@ const LoanInfoModal = (props) => {
                 console.log(res.data.data);
               })
               .catch((err) => {
-                console.log(err);
+                //console.log(err);
               });
           },
         },
@@ -69,11 +68,9 @@ const LoanInfoModal = (props) => {
           onPress: () => {
             axios
               .delete(`${api}/api/v1/bills/debt/${id}/${billId}`)
-              .then((res) => {
-                console.log(res.data);
-              })
+              .then((res) => {})
               .catch((err) => {
-                console.log(err);
+                //console.log(err);
               });
           },
         },

@@ -15,7 +15,7 @@ const BoughtRemainderScreen = () => {
         setData(res.data.goodsLists);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   useEffect(() => {

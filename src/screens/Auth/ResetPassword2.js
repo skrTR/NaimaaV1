@@ -46,18 +46,14 @@ const ResetPassword2 = (props) => {
         });
       })
       .catch((err) => {
-        console.log(err.message);
         Alert.alert(err.response.data.error.message);
       });
   };
   const sendMessage = () => {
     axios
       .post(`${api}/api/v1/users/forgot-password`, { phone: phone })
-      .then((res) => {
-        console.log(res.data);
-      })
+      .then((res) => {})
       .catch((err) => {
-        console.log(err.message);
         Alert.alert(err.response.data.error.message);
       });
   };

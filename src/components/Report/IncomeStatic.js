@@ -4,7 +4,6 @@ import moment from "moment";
 import { useNavigation } from "@react-navigation/native";
 const IncomeStatic = ({ data }) => {
   const navigation = useNavigation();
-  console.log(data);
   return (
     <>
       <TouchableOpacity

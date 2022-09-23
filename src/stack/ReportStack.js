@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import MyBackButton from "../components/MyBackButton";
 import ProductDetailScreen from "../screens/List/ProductDetailScreen";
+import AllReportChooseModal from "../screens/Report/AllReportModal/AllReportChooseModal";
 import AllReportScreen from "../screens/Report/AllReportScreen";
 import AllStaticScreen from "../screens/Report/AllStaticScreen";
 import BillDetailScreen from "../screens/Report/BillDetailScreen";
@@ -119,6 +120,15 @@ const ReportStack = () => {
         options={{
           presentation: "formSheet",
           title: "Зээлийн Дэлгэрэнгүй",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <ReportStack.Screen
+        name="AllReportChooseModal"
+        component={AllReportChooseModal}
+        options={{
+          presentation: "formSheet",
+          title: "Сонгох",
           headerLeft: () => <MyBackButton />,
         }}
       />

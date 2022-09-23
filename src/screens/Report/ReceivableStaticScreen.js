@@ -15,7 +15,7 @@ const ReceivableStaticScreen = () => {
         setData(res.data.debtsList);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   useEffect(() => {
@@ -33,7 +33,6 @@ const ReceivableStaticScreen = () => {
     widthArr: [120, 120, 120, 120, 120, 120],
   };
   const state = header;
-  console.log(data);
   return (
     <View style={styles.container}>
       <ScrollView horizontal={true}>

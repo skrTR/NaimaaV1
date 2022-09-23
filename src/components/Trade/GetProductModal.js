@@ -25,10 +25,10 @@ const GetProductModal = (props) => {
       axios
         .post(`${api}/api/v1/templates`, { name: templateName })
         .then((res) => {
-          console.log(res.data.data, "template");
+          // console.log(res.data.data, "template");
         })
         .catch((err) => {
-          console.log(err);
+          //console.log(err);
         });
     }
     axios
@@ -38,7 +38,7 @@ const GetProductModal = (props) => {
         setLoanModal(!loanModal);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   const postIncomeOnline = () => {
@@ -49,7 +49,7 @@ const GetProductModal = (props) => {
           console.log(res.data.data, "template");
         })
         .catch((err) => {
-          console.log(err);
+          //console.log(err);
         });
     }
     axios
@@ -59,7 +59,7 @@ const GetProductModal = (props) => {
         setLoanModal(!loanModal);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
 
@@ -71,7 +71,7 @@ const GetProductModal = (props) => {
           console.log(res.data.data, "template");
         })
         .catch((err) => {
-          console.log(err);
+          //console.log(err);
         });
     }
     axios
@@ -89,7 +89,7 @@ const GetProductModal = (props) => {
         setLoanModal(!loanModal);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   return (

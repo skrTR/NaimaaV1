@@ -39,7 +39,7 @@ export const UserStore = (props) => {
       })
       .catch((err) => {
         loginFailed(err.message);
-        console.log(err);
+        //console.log(err);
         let message = err.message;
         if (message === "Request failed with status code 404")
           message = "Утасны дугаар нууц үг хоорондоо таарахгүй байна";
@@ -68,7 +68,6 @@ export const UserStore = (props) => {
       .catch((err) => {
         loginFailed(err.message);
         let message = err.message;
-        console.log(err.response.data.error.message);
         if (message === "Request failed with status code 404")
           message = "Утасны дугаар нууц үг хоорондоо таарахгүй байна";
         else if (message === "Network Error")
@@ -86,7 +85,6 @@ export const UserStore = (props) => {
   };
 
   const loginFailed = (error) => {
-    console.log(error);
     setIsLoggedIn(false);
     setPhone(null);
     setUserRole(null);
@@ -106,7 +104,7 @@ export const UserStore = (props) => {
         JSON.stringify({ token, phone, userRole, userId })
       );
     } catch (err) {
-      console.log("Утас руу хадгалж чадсангүй...");
+      // console.log("Утас руу хадгалж чадсангүй...");
     }
   };
 

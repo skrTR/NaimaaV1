@@ -25,10 +25,10 @@ const GetDrainModal = (props) => {
       axios
         .post(`${api}/api/v1/templates`, { name: templateName })
         .then((res) => {
-          console.log(res.data.data, "template");
+          // console.log(res.data.data, "template");
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     }
     axios
@@ -46,10 +46,10 @@ const GetDrainModal = (props) => {
       axios
         .post(`${api}/api/v1/templates`, { name: templateName })
         .then((res) => {
-          console.log(res.data.data, "template");
+          // console.log(res.data.data, "template");
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     }
     axios
@@ -66,7 +66,7 @@ const GetDrainModal = (props) => {
         setDrainModal(!drainModal);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   return (

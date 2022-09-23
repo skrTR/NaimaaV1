@@ -30,7 +30,7 @@ const ResultedProduct = (props) => {
         setRefresh(true);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   return (

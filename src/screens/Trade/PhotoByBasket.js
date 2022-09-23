@@ -27,7 +27,7 @@ const PhotoByBasket = (props) => {
         navigation.goBack();
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   const checkPrice = (text) => {

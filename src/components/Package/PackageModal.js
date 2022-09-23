@@ -25,11 +25,10 @@ const PackageModal = (props) => {
         template: id,
       })
       .then((res) => {
-        console.log(res.data.data);
         setLoanModal(!loanModal);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -44,11 +43,10 @@ const PackageModal = (props) => {
         loanDate: loanDate,
       })
       .then((res) => {
-        console.log(res.data.data);
         setLoanModal(!loanModal);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   return (

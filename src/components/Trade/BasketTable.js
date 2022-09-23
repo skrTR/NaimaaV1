@@ -13,7 +13,7 @@ const BasketTable = ({ basket, setRefresh }) => {
         setRefresh(true);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   return (

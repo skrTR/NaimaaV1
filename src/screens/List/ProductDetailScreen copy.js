@@ -25,7 +25,7 @@ const ProductDetailScreen = ({ route }) => {
         setProductData(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   }, []);
   const deleteProduct = () => {
@@ -48,7 +48,7 @@ const ProductDetailScreen = ({ route }) => {
                 navigation.goBack();
               })
               .catch((err) => {
-                console.log(err);
+                //console.log(err);
               });
           },
         },

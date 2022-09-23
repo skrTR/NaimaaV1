@@ -15,7 +15,7 @@ const AllStaticScreen = () => {
         setData(res.data.goodsList);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   useEffect(() => {

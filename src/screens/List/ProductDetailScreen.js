@@ -24,11 +24,10 @@ const ProductDetailScreen = ({ route }) => {
     axios
       .get(`${api}/api/v1/goods/${id}`)
       .then((res) => {
-        // console.log(res.data.data);
         setProductData(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
     axios
       .get(`${api}/api/v1/transactions/user?good=${id}&sort=-createdAt`)
@@ -37,7 +36,7 @@ const ProductDetailScreen = ({ route }) => {
         setTrans(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   }, []);
   const deleteProduct = () => {
@@ -60,7 +59,7 @@ const ProductDetailScreen = ({ route }) => {
                 navigation.goBack();
               })
               .catch((err) => {
-                console.log(err);
+                //console.log(err);
               });
           },
         },

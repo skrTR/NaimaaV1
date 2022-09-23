@@ -20,11 +20,11 @@ const BillDetailScreen = (props) => {
     axios
       .get(`${api}/api/v1/transactions/user?bill=${bill}`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setData(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   };
   useEffect(() => {
