@@ -1,26 +1,23 @@
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
 import { Table, Row } from "react-native-table-component";
-import { api } from "../../../Constants";
 
-const BoughtRemainderScreen = (props) => {
+const SalesForecastReport = (props) => {
   const { data } = props.route.params;
   const navigation = useNavigation();
 
   const header = {
     tableHead: [
-      "Бараа материалын нэр төрөл",
-      "Тоо хэмжээ",
-      "Нийт өртөг",
+      "Бараа бүтээгдэхүүний нэр төрөл",
+      "Тоо ширхэг",
       "Нэгжийн дундаж өртөг",
-      "Тоо хэмжээ",
-      "Нийт өртөг",
-      "Тоо хэмжээ",
-      "Нийт өртөг",
+      "Нийт үнэ",
+      "Борлуулсан барааны дундаж үнэ",
+      "Төсөөллийн борлуулалт /дундаж үнээр/",
+      "Төсөөллийн ашиг",
     ],
-    widthArr: [100, 60, 80, 100, 120, 140, 160, 180],
+    widthArr: [150, 90, 120, 120, 120, 120, 120],
   };
   const state = header;
   return (
@@ -29,14 +26,15 @@ const BoughtRemainderScreen = (props) => {
         <View>
           <Table borderStyle={{ borderWidth: 1, borderColor: "#C1C0B9" }}>
             <Row
-              data={[
-                "Эхний үлдэгдэл + худалдаж авсан бараа материал",
-                "Борлуулалт",
-                "Нийт бараа бүтээгдэхүүний үлдэгдэл",
-              ]}
+              data={["2022-09-23 наас 2022-09-24 гүйлгээ"]}
               style={styles.header1}
               textStyle={styles.text}
-              widthArr={[340, 260, 340]}
+            />
+            <Row
+              data={["", "Бараа бүтээгдэхүүн", ""]}
+              style={styles.header1}
+              textStyle={styles.text}
+              widthArr={[150, 330, 360]}
             />
             <Row
               data={state.tableHead}
@@ -74,12 +72,13 @@ const BoughtRemainderScreen = (props) => {
     </View>
   );
 };
-export default BoughtRemainderScreen;
+export default SalesForecastReport;
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: "#fff" },
   header: { height: 50, backgroundColor: "#537791" },
   text: { textAlign: "center" },
+  text1: { textAlign: "center", fontWeight: "800" },
   dataWrapper: { marginTop: -1 },
   row: { height: 40, backgroundColor: "#E7E6E1" },
   header1: { height: 50, backgroundColor: "#cccccccc" },

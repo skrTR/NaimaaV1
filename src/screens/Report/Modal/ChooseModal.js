@@ -2,56 +2,61 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
-const AllReportChooseModal = () => {
+const ChooseModal = (props) => {
   const navigation = useNavigation();
+  const { type } = props.route.params;
   return (
     <View>
       <TouchableOpacity
-        onPress={() => navigation.navigate("IncomeStaticScreen")}
         style={{
           backgroundColor: "#175E26",
-          padding: 5,
-          marginTop: 10,
-          marginHorizontal: 10,
-          borderRadius: 10,
+          padding: 10,
+          marginHorizontal: 20,
+          borderRadius: 50,
+          marginTop: 20,
+        }}
+        onPress={() => {
+          navigation.navigate("ReportDateModal", { type });
         }}
       >
         <Text
           style={{
+            fontSize: 18,
+            fontWeight: "700",
             color: "white",
-            padding: 5,
             textAlign: "center",
-            fontWeight: "bold",
           }}
         >
-          Категори-оор авах
+          Хугацаагаар
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate("IncomeStaticScreen")}
         style={{
           backgroundColor: "#175E26",
-          padding: 5,
-          marginTop: 10,
-          marginHorizontal: 10,
-          borderRadius: 10,
+          padding: 10,
+          marginHorizontal: 20,
+          borderRadius: 50,
+          marginTop: 20,
+        }}
+        onPress={() => {
+          navigation.navigate("ChooseCategoryModal", { type });
         }}
       >
         <Text
           style={{
+            fontSize: 18,
+            fontWeight: "700",
             color: "white",
-            padding: 5,
             textAlign: "center",
-            fontWeight: "bold",
           }}
         >
-          Хугацаагаар нийтд нь авах
+          Категори-оор
         </Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default AllReportChooseModal;
+export default ChooseModal;
 
 const styles = StyleSheet.create({});

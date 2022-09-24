@@ -12,8 +12,8 @@ import axios from "axios";
 import { api } from "../../../Constants";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import Spinner from "../../components/Spinner";
 import moment from "moment";
+import Loading from "../../components/Loading";
 const ProductDetailScreen = ({ route }) => {
   const { id } = route.params;
   const [productData, setProductData] = useState([]);
@@ -67,7 +67,7 @@ const ProductDetailScreen = ({ route }) => {
     );
   };
   if (loading) {
-    return <Spinner />;
+    return <Loading />;
   }
   return (
     <ScrollView>

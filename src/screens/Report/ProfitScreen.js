@@ -1,40 +1,46 @@
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import moment from "moment";
+import React from "react";
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
 import { Table, Row } from "react-native-table-component";
-import { api } from "../../../Constants";
 
-const ProfitScreen = () => {
-  const [data, setData] = useState([]);
+const ProfitScreen = (props) => {
+  const { data, startDate, endDate } = props.route.params;
   const navigation = useNavigation();
-  const getAllData = () => {
-    axios
-      .get(`${api}/api/v1/transactions/profit`)
-      .then((res) => {
-        setData(res.data.goodsMargins);
-      })
-      .catch((err) => {
-        //console.log(err);
-      });
-  };
-  useEffect(() => {
-    getAllData();
-  }, []);
+
   const header = {
-    tableHead: ["Нэр", "Борлуулсан тоо", "Борлуулсан үнэ", "Нэгж үнэ", "Ашиг"],
-    widthArr: [100, 60, 80, 100, 120],
+    tableHead: [
+      "Бараа бүтээгдэхүүний нэр төрөл",
+      "Нэгжийн дундаж өртөг",
+      "Тоо ширхэг",
+      "Нэгжийн дундаж үнэ",
+      "Нийт үнэ",
+      "Нийт ашиг",
+    ],
+    widthArr: [140, 100, 100, 120, 100, 100],
   };
   const state = header;
   return (
     <View style={styles.container}>
       <ScrollView horizontal={true}>
+        {console.log(startDate)}
         <View>
           <Table borderStyle={{ borderWidth: 1, borderColor: "#C1C0B9" }}>
             <Row
-              data={["Ашиг орлогын тайлан"]}
+              data={[
+                `${moment(startDate).format("YYYY-MM-DD")} наас ${moment(
+                  endDate
+                ).format("YYYY-MM-DD")} борлуулалт үр ашгийн тайлан`,
+              ]}
               style={styles.header1}
               textStyle={styles.text1}
+              // widthArr={[780]}
+            />
+            <Row
+              data={["", "Борлуулсан"]}
+              style={styles.header1}
+              textStyle={styles.text}
+              widthArr={[240, 320, 100]}
             />
             <Row
               data={state.tableHead}
@@ -49,7 +55,7 @@ const ProfitScreen = () => {
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate("ProductDetailScreen", {
-                      id: rowData[5],
+                      id: rowData[6],
                     })
                   }
                   key={index}

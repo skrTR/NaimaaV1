@@ -21,7 +21,7 @@ import CategoryModal from "../../components/Trade/AddProduct/CategoryModal";
 import QuantityModal from "../../components/Trade/AddProduct/QuantityModal";
 import CameraModal from "../../components/Trade/AddProduct/CameraModal";
 import BarcodeModal from "../../components/Trade/AddProduct/BarcodeModal";
-import Spinner from "../../components/Spinner";
+import Loading from "../../components/Loading";
 const AddProductModal = () => {
   const navigation = useNavigation();
   const [productImage, setProductImage] = useState();
@@ -235,7 +235,7 @@ const AddProductModal = () => {
     );
   }
   if (loader) {
-    return <Spinner />;
+    return <Loading />;
   }
   return (
     <KeyboardAvoidingView

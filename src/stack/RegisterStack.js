@@ -2,10 +2,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import MyBackButton from "../components/MyBackButton";
 import ResetPassword2 from "../screens/Auth/ResetPassword2";
-import DateExtendScreen from "../screens/Register/DateExtendScreen";
-import QpayModal from "../screens/Register/QpayModal";
+import DateExtendScreen from "../screens/Payment/DateExtendScreen";
+import QpayModal from "../screens/Payment/QpayModal";
 import RegisterScreen from "../screens/Register/RegisterScreen";
-
 const RegisterStack = () => {
   const RegisterStack = createNativeStackNavigator();
   return (

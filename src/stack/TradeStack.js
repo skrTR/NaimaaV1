@@ -3,6 +3,8 @@ import React from "react";
 import MyBackButton from "../components/MyBackButton";
 import ProductDetailScreen from "../screens/List/ProductDetailScreen";
 import ProductEditModal from "../screens/List/ProductEditModal";
+import DateExtendScreen from "../screens/Payment/DateExtendScreen";
+import QpayModal from "../screens/Payment/QpayModal";
 import AddProductModal from "../screens/Trade/AddProductModal";
 import PhotoByBasket from "../screens/Trade/PhotoByBasket";
 import SearchByPhoto from "../screens/Trade/SearchByPhoto";
@@ -65,6 +67,24 @@ const TradeStack = () => {
         options={{
           presentation: "formSheet",
           title: "Бараа засах",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <TradeStack.Screen
+        name="QpayModal"
+        component={QpayModal}
+        options={{
+          presentation: "formSheet",
+          title: "Qpay",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <TradeStack.Screen
+        name="DateExtendScreen"
+        component={DateExtendScreen}
+        options={{
+          presentation: "formSheet",
+          title: "Хугацаа сунгах",
           headerLeft: () => <MyBackButton />,
         }}
       />

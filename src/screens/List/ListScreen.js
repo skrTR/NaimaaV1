@@ -2,13 +2,10 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView,
 } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import { api } from "../../../Constants";
-import NormalHeader from "../../components/NormalHeader";
 import { DataTable } from "react-native-paper";
-import { AntDesign } from "@expo/vector-icons";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import Empty from "../../components/Empty";
 import Header from "../../components/Header";
@@ -85,7 +82,7 @@ const ListScreen = (props) => {
               value={search}
               onChangeText={(text) => searchFilter(text)}
             />
-            {filterData.length > 0 ? (
+            {filterData && filterData.length > 0 ? (
               <DataTable>
                 {/* Table headeer */}
                 <DataTable.Header>

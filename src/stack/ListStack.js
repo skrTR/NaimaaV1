@@ -5,6 +5,8 @@ import ProductDetailScreen from "../screens/List/ProductDetailScreen";
 import MyBackButton from "../components/MyBackButton";
 import ProductEditModal from "../screens/List/ProductEditModal";
 import AddProductModal from "../screens/Trade/AddProductModal";
+import QpayModal from "../screens/Payment/QpayModal";
+import DateExtendScreen from "../screens/Payment/DateExtendScreen";
 const ListStack = () => {
   const ListStack = createNativeStackNavigator();
   return (
@@ -38,6 +40,24 @@ const ListStack = () => {
         options={{
           presentation: "formSheet",
           title: "Бараа нэмэх",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <ListStack.Screen
+        name="QpayModal"
+        component={QpayModal}
+        options={{
+          presentation: "formSheet",
+          title: "Qpay",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <ListStack.Screen
+        name="DateExtendScreen"
+        component={DateExtendScreen}
+        options={{
+          presentation: "formSheet",
+          title: "Хугацаа сунгах",
           headerLeft: () => <MyBackButton />,
         }}
       />

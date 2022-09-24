@@ -152,7 +152,7 @@ const TradeScreen = () => {
               )}
             </View>
             {/* Onresulted product */}
-            {filterData.length > 0 ? (
+            {filterData && filterData.length > 0 ? (
               <View>
                 {barcodeData.length > 0 ? (
                   <ResultedProduct

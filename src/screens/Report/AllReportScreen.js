@@ -1,26 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
 import { Table, Row } from "react-native-table-component";
-import { api } from "../../../Constants";
 
-const AllReportScreen = () => {
-  const [data, setData] = useState([]);
+const AllReportScreen = (props) => {
+  const { data } = props.route.params;
+
   const navigation = useNavigation();
-  const getAllData = () => {
-    axios
-      .get(`${api}/api/v1/transactions/profit`)
-      .then((res) => {
-        setData(res.data.goodsReceipts);
-      })
-      .catch((err) => {
-        //console.log(err);
-      });
-  };
-  useEffect(() => {
-    getAllData();
-  }, []);
+
   const header = {
     tableHead: [
       "Нэр",

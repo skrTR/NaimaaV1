@@ -2,7 +2,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import MyBackButton from "../components/MyBackButton";
 import ProductDetailScreen from "../screens/List/ProductDetailScreen";
-import AllReportChooseModal from "../screens/Report/AllReportModal/AllReportChooseModal";
+import DateExtendScreen from "../screens/Payment/DateExtendScreen";
+import QpayModal from "../screens/Payment/QpayModal";
 import AllReportScreen from "../screens/Report/AllReportScreen";
 import AllStaticScreen from "../screens/Report/AllStaticScreen";
 import BillDetailScreen from "../screens/Report/BillDetailScreen";
@@ -10,10 +11,16 @@ import BoughtRemainderScreen from "../screens/Report/BoughtRemainderScreen";
 import IncomeStaticScreen from "../screens/Report/IncomeStaticScreen";
 import LoanInfoModal from "../screens/Report/LoanInfoModal";
 import LoanStaticScreen from "../screens/Report/LoanStaticScreen";
+import ChooseCategoryModal from "../screens/Report/Modal/ChooseCategoryModal";
+import ChooseModal from "../screens/Report/Modal/ChooseModal";
+import ReportCategoryModal from "../screens/Report/Modal/ReportCategoryModal";
+import ReportDateModal from "../screens/Report/Modal/ReportDateModal";
 import OutcomeStaticScreen from "../screens/Report/OutcomeStaticScreen";
 import ProfitScreen from "../screens/Report/ProfitScreen";
 import ReceivableStaticScreen from "../screens/Report/ReceivableStaticScreen";
 import ReportScreen from "../screens/Report/ReportScreen";
+import SalesForecastReport from "../screens/Report/SalesForecastReport";
+import TransactionReport from "../screens/Report/TransactionReport";
 
 const ReportStack = () => {
   const ReportStack = createNativeStackNavigator();
@@ -123,12 +130,76 @@ const ReportStack = () => {
           headerLeft: () => <MyBackButton />,
         }}
       />
+
       <ReportStack.Screen
-        name="AllReportChooseModal"
-        component={AllReportChooseModal}
+        name="ChooseModal"
+        component={ChooseModal}
         options={{
           presentation: "formSheet",
           title: "Сонгох",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <ReportStack.Screen
+        name="ReportDateModal"
+        component={ReportDateModal}
+        options={{
+          presentation: "formSheet",
+          title: "Сонгох",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <ReportStack.Screen
+        name="ReportCategoryModal"
+        component={ReportCategoryModal}
+        options={{
+          presentation: "formSheet",
+          title: "Сонгох",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <ReportStack.Screen
+        name="ChooseCategoryModal"
+        component={ChooseCategoryModal}
+        options={{
+          presentation: "formSheet",
+          title: "Сонгох",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <ReportStack.Screen
+        name="QpayModal"
+        component={QpayModal}
+        options={{
+          presentation: "formSheet",
+          title: "Qpay",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <ReportStack.Screen
+        name="DateExtendScreen"
+        component={DateExtendScreen}
+        options={{
+          presentation: "formSheet",
+          title: "Хугацаа сунгах",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <ReportStack.Screen
+        name="TransactionReport"
+        component={TransactionReport}
+        options={{
+          presentation: "formSheet",
+          title: "Гүйлгээний тайлан",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <ReportStack.Screen
+        name="SalesForecastReport"
+        component={SalesForecastReport}
+        options={{
+          presentation: "formSheet",
+          title: "Борлуулалт төсөөллийн нэгдсэн тайлан",
           headerLeft: () => <MyBackButton />,
         }}
       />

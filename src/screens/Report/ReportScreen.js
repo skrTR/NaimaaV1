@@ -29,6 +29,7 @@ const ReportScreen = () => {
       {time ? (
         <View>
           <Header />
+          {/* 1.Орлого гүйлгээний тайлан */}
           <TouchableOpacity
             onPress={() => navigation.navigate("IncomeStaticScreen")}
             style={{
@@ -50,6 +51,8 @@ const ReportScreen = () => {
               Орлогын гүйлгээний жагсаалт
             </Text>
           </TouchableOpacity>
+          {/* 1.Орлого гүйлгээний тайлан энд*/}
+          {/* 2.Зарлага гүйлгээний тайлан */}
           <TouchableOpacity
             onPress={() => navigation.navigate("OutcomeStaticScreen")}
             style={{
@@ -68,11 +71,15 @@ const ReportScreen = () => {
                 fontWeight: "bold",
               }}
             >
-              Зарлагын гүйлгээний тайлан
+              Зарлагын гүйлгээний жагсалт
             </Text>
           </TouchableOpacity>
+          {/* 2.Зарлага гүйлгээний тайлан end*/}
+          {/* 3.Гүйлгээ ний тайлан */}
           <TouchableOpacity
-            onPress={() => navigation.navigate("AllStaticScreen")}
+            onPress={() =>
+              navigation.navigate("ChooseModal", { type: "TransactionReport" })
+            }
             style={{
               backgroundColor: "#175E26",
               padding: 5,
@@ -92,8 +99,12 @@ const ReportScreen = () => {
               Гүйлгээний тайлан
             </Text>
           </TouchableOpacity>
+          {/* 3.Гүйлгээ ний тайлан end */}
+          {/* 4.Бараа бүтээгдэхүүний тайлан */}
           <TouchableOpacity
-            onPress={() => navigation.navigate("BoughtRemainderScreen")}
+            onPress={() =>
+              navigation.navigate("ChooseModal", { type: "BoughtRemainder" })
+            }
             style={{
               backgroundColor: "#175E26",
               padding: 5,
@@ -110,11 +121,15 @@ const ReportScreen = () => {
                 fontWeight: "bold",
               }}
             >
-              Эхний үлдэгдэл болон дундаж үнэ
+              Бараа бүтээгдэхүүний тайлан
             </Text>
           </TouchableOpacity>
+          {/* 4.Бараа бүтээгдэхүүний тайлан end */}
+          {/* 5.Борлуулалт үр ашгийн тайлан */}
           <TouchableOpacity
-            onPress={() => navigation.navigate("ProfitScreen")}
+            onPress={() =>
+              navigation.navigate("ChooseModal", { type: "Profit" })
+            }
             style={{
               backgroundColor: "#175E26",
               padding: 5,
@@ -131,30 +146,11 @@ const ReportScreen = () => {
                 fontWeight: "bold",
               }}
             >
-              Ашиг орлогын тайлан
+              Борлуулалт үр ашгийн тайлан
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("AllReportChooseModal")}
-            style={{
-              backgroundColor: "#175E26",
-              padding: 5,
-              marginTop: 10,
-              marginHorizontal: 10,
-              borderRadius: 10,
-            }}
-          >
-            <Text
-              style={{
-                color: "white",
-                padding: 5,
-                textAlign: "center",
-                fontWeight: "bold",
-              }}
-            >
-              Нэгдсэн тайлан
-            </Text>
-          </TouchableOpacity>
+          {/* 5.Борлуулалт үр ашгийн тайлан end */}
+          {/* 6.Зээлийн тайлан */}
           <TouchableOpacity
             onPress={() => navigation.navigate("LoanStaticScreen")}
             style={{
@@ -176,6 +172,8 @@ const ReportScreen = () => {
               Зээлийн тайлан
             </Text>
           </TouchableOpacity>
+          {/* 6.Зээлийн тайлан end*/}
+          {/* 7.Авлагын тайлан */}
           <TouchableOpacity
             onPress={() => navigation.navigate("ReceivableStaticScreen")}
             style={{
@@ -197,6 +195,103 @@ const ReportScreen = () => {
               Авлагын тайлан
             </Text>
           </TouchableOpacity>
+          {/* 7.Авлагын тайлан end*/}
+          {/* 8.Борлуулалт төсөөллийн нэгдсэн тайлан шинээр хийнэ !!! */}
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("ChooseModal", { type: "SalesForecast" });
+            }}
+            style={{
+              backgroundColor: "#175E26",
+              padding: 5,
+              marginTop: 10,
+              marginHorizontal: 10,
+              borderRadius: 10,
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                padding: 5,
+                textAlign: "center",
+                fontWeight: "bold",
+              }}
+            >
+              Борлуулалт төсөөллийн нэгдсэн тайлан
+            </Text>
+          </TouchableOpacity>
+          {/* 8.Борлуулалт төсөөллийн нэгдсэн тайлан end*/}
+          {/* 9.Тооллогын тайлан шинээр хийнэ !!! */}
+          {/* <TouchableOpacity
+            onPress={() => navigation.navigate("ReceivableStaticScreen")}
+            style={{
+              backgroundColor: "#175E26",
+              padding: 5,
+              marginTop: 10,
+              marginHorizontal: 10,
+              borderRadius: 10,
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                padding: 5,
+                textAlign: "center",
+                fontWeight: "bold",
+              }}
+            >
+              Тооллогын тайлан тайлан
+            </Text>
+          </TouchableOpacity> */}
+          {/* 9.Тооллогын тайлан тайлан end*/}
+          {/* 10.Нэгдсэн тайлан */}
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("ChooseModal", { type: "AllReport" })
+            }
+            style={{
+              backgroundColor: "#175E26",
+              padding: 5,
+              marginTop: 10,
+              marginHorizontal: 10,
+              borderRadius: 10,
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                padding: 5,
+                textAlign: "center",
+                fontWeight: "bold",
+              }}
+            >
+              Нэгдсэн тайлан
+            </Text>
+          </TouchableOpacity>
+          {/* 10.Нэгдсэн тайлан end */}
+          {/* 11.Бүх тайлан */}
+          <TouchableOpacity
+            onPress={() => navigation.navigate("AllStaticScreen")}
+            style={{
+              backgroundColor: "#175E26",
+              padding: 5,
+              marginTop: 10,
+              marginHorizontal: 10,
+              borderRadius: 10,
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                padding: 5,
+                textAlign: "center",
+                fontWeight: "bold",
+              }}
+            >
+              Бүх тайлан
+            </Text>
+          </TouchableOpacity>
+          {/* 11.Бүх тайлан end */}
         </View>
       ) : (
         <PaymentScreen />

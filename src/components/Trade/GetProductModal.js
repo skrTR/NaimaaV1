@@ -59,7 +59,7 @@ const GetProductModal = (props) => {
         setLoanModal(!loanModal);
       })
       .catch((err) => {
-        //console.log(err);
+        console.log(err.message);
       });
   };
 
@@ -296,10 +296,10 @@ const GetProductModal = (props) => {
             style={[styles.button, styles.buttonClose]}
             onPress={
               isLoan === 1
-                ? postLoanIncome
-                : isLoan === 2
                 ? postIncome
-                : isLoan === 3 && postIncomeOnline
+                : isLoan === 2
+                ? postIncomeOnline
+                : isLoan === 3 && postLoanIncome
             }
           >
             <Text style={[styles.textStyle, { fontSize: 16 }]}>Болсон</Text>

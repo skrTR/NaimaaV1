@@ -24,7 +24,9 @@ const PaymentScreen = () => {
         console.log(err);
       });
   };
-
+  const logout = () => {
+    state.logout();
+  };
   useEffect(() => {
     Animated.timing(progress, {
       toValue: 1,
@@ -96,6 +98,27 @@ const PaymentScreen = () => {
           }}
         >
           Үйлчилгээ сунгах
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{
+          backgroundColor: "#175E26",
+          padding: 10,
+          marginHorizontal: 20,
+          borderRadius: 50,
+          marginTop: 20,
+        }}
+        onPress={logout}
+      >
+        <Text
+          style={{
+            fontSize: 18,
+            fontWeight: "700",
+            color: "white",
+            textAlign: "center",
+          }}
+        >
+          Аккоунтаас гарах
         </Text>
       </TouchableOpacity>
     </>

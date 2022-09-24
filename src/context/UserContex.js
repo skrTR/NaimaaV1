@@ -39,15 +39,9 @@ export const UserStore = (props) => {
       })
       .catch((err) => {
         loginFailed(err.message);
-        //console.log(err);
-        let message = err.message;
-        if (message === "Request failed with status code 404")
-          message = "Утасны дугаар нууц үг хоорондоо таарахгүй байна";
-        else if (message === "Network Error")
-          message = "Та интернэт холболтоо шалгана уу";
-        else {
-          message = err.response.data.error.message;
-        }
+
+        let message = err.response.data.error.message;
+
         Alert.alert(message);
       });
   };
@@ -67,20 +61,8 @@ export const UserStore = (props) => {
       })
       .catch((err) => {
         loginFailed(err.message);
-        let message = err.message;
-        if (message === "Request failed with status code 404")
-          message = "Утасны дугаар нууц үг хоорондоо таарахгүй байна";
-        else if (message === "Network Error")
-          message = "Та интернэт холболтоо шалгана уу";
-        else if (
-          err.response.data.error.message ===
-          "Энэ талбарын утгыг давхардуулж өгч болохгүй!"
-        ) {
-          message = "Утасны дугаар бүртгүүлсэн байна.";
-        } else {
-          message = err.message;
-        }
-        Alert.alert(message);
+
+        Alert.alert(err.response.data.error.message);
       });
   };
 

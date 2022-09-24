@@ -13,6 +13,7 @@ const LoanStaticScreen = () => {
       .get(`${api}/api/v1/bills/debt?type=Орлого`)
       .then((res) => {
         setData(res.data.debtsList);
+        console.log(res.data);
       })
       .catch((err) => {
         //console.log(err);
