@@ -23,7 +23,6 @@ const ProfitScreen = (props) => {
   return (
     <View style={styles.container}>
       <ScrollView horizontal={true}>
-        {console.log(startDate)}
         <View>
           <Table borderStyle={{ borderWidth: 1, borderColor: "#C1C0B9" }}>
             <Row

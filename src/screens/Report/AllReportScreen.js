@@ -1,10 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
+import moment from "moment";
 import React from "react";
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
 import { Table, Row } from "react-native-table-component";
 
 const AllReportScreen = (props) => {
-  const { data } = props.route.params;
+  const { data, startDate, endDate } = props.route.params;
 
   const navigation = useNavigation();
 
@@ -27,6 +28,15 @@ const AllReportScreen = (props) => {
       <ScrollView horizontal={true}>
         <View>
           <Table borderStyle={{ borderWidth: 1, borderColor: "#C1C0B9" }}>
+            <Row
+              data={[
+                `${moment(startDate).format("YYYY-MM-DD")} наас ${moment(
+                  endDate
+                ).format("YYYY-MM-DD")} борлуулалт үр ашгийн тайлан`,
+              ]}
+              style={styles.header1}
+              textStyle={styles.text}
+            />
             <Row
               data={["Эхний үлдэгдэл", "Ашигын тайлан", "Нийт үлдэгдэл"]}
               style={styles.header1}

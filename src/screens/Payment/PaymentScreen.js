@@ -64,7 +64,7 @@ const PaymentScreen = () => {
               fontSize: 16,
             }}
           >
-            Үйлчилгээний хугацаа дуусах хугацаа:{" "}
+            Үйлчилгээний хугацаа дууссан :{" "}
           </Text>
           <Text
             style={{
@@ -73,7 +73,7 @@ const PaymentScreen = () => {
               color: data ? "red" : "green",
             }}
           >
-            {moment(data).format("YYYY-MM-DD hh:ss a")}
+            {moment(data).format("YYYY-MM-DD HH:mm")}
           </Text>
         </View>
       </View>

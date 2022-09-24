@@ -1,12 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
 import { Table, Row } from "react-native-table-component";
 import { api } from "../../../Constants";
 
 const BoughtRemainderScreen = (props) => {
-  const { data } = props.route.params;
+  const { data, startDate, endDate } = props.route.params;
   const navigation = useNavigation();
 
   const header = {
@@ -28,6 +29,16 @@ const BoughtRemainderScreen = (props) => {
       <ScrollView horizontal={true}>
         <View>
           <Table borderStyle={{ borderWidth: 1, borderColor: "#C1C0B9" }}>
+            <Row
+              data={[
+                `${moment(startDate).format("YYYY-MM-DD")} наас ${moment(
+                  endDate
+                ).format("YYYY-MM-DD")} борлуулалт үр ашгийн тайлан`,
+              ]}
+              style={styles.header1}
+              textStyle={styles.text}
+              // widthArr={[780]}
+            />
             <Row
               data={[
                 "Эхний үлдэгдэл + худалдаж авсан бараа материал",

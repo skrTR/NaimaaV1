@@ -1,11 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
 import { Table, Row } from "react-native-table-component";
 import { api } from "../../../Constants";
 
-const AllStaticScreen = () => {
+const AllStaticScreen = (props) => {
   const [data, setData] = useState([]);
   const navigation = useNavigation();
   const getAllData = () => {

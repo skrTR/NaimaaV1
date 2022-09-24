@@ -34,26 +34,26 @@ const ReportCategoryModal = (props) => {
           });
         } else if (type === "Profit") {
           navigation.navigate("ProfitScreen", {
-            startDate: res.data.date1,
-            endDate: res.data.date2,
+            startDate: date1,
+            endDate: now,
             data: res.data.goodsMargins,
           });
         } else if (type === "SalesForecast") {
           navigation.navigate("SalesForecastReport", {
-            startDate: res.data.date1,
-            endDate: res.data.date2,
+            startDate: date1,
+            endDate: now,
             data: res.data.salesForecastReport,
           });
         } else if (type === "AllReport") {
           navigation.navigate("AllReportScreen", {
-            startDate: res.data.date1,
-            endDate: res.data.date2,
+            startDate: date1,
+            endDate: now,
             data: res.data.goodsReceipts,
           });
         } else if (type === "AllStatic") {
           navigation.navigate("AllStaticScreen", {
-            startDate: res.data.date1,
-            endDate: res.data.date2,
+            startDate: date1,
+            endDate: now,
             data: res.data.goodsLists,
           });
         }

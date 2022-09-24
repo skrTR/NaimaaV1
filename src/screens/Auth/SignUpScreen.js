@@ -20,12 +20,11 @@ const SignUpScreen = () => {
   const state = useContext(UserContext);
   const navigation = useNavigation();
   const [reading, setReading] = useState(false);
-  const [phone, setPhone] = useState("95040448");
-  const [password, setPassword] = useState("123456");
-  const [password1, setPassword1] = useState("123456");
-  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [password1, setPassword1] = useState("");
   const [firstName, setFirstName] = useState("");
-  const [email, setEmail] = useState("gg@gg.com");
+  const [email, setEmail] = useState("");
   const [isSecure, setIsSecure] = useState(true);
   const login = () => {
     if (phone.length < 6) {
@@ -47,7 +46,6 @@ const SignUpScreen = () => {
 
     navigation.navigate("SignUpScreen2", {
       firstName,
-      lastName,
       email,
       phone,
       password,
@@ -118,25 +116,10 @@ const SignUpScreen = () => {
                   }}
                 />
               </View>
+
               <View style={{ marginTop: 10 }}>
                 <TextInput
-                  placeholder="Овог"
-                  placeholderTextColor={"black"}
-                  value={lastName}
-                  onChangeText={setLastName}
-                  style={styles.textInputFont}
-                />
-                <View
-                  style={{
-                    borderWidth: 1,
-                    borderColor: "#175E26",
-                    marginVertical: 5,
-                  }}
-                />
-              </View>
-              <View style={{ marginTop: 10 }}>
-                <TextInput
-                  placeholder="Hэр"
+                  placeholder="Hэр *"
                   placeholderTextColor={"black"}
                   value={firstName}
                   onChangeText={setFirstName}
