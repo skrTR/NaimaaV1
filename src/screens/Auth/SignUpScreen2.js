@@ -15,12 +15,13 @@ import OTPInputView from "@twotalltotems/react-native-otp-input";
 import axios from "axios";
 import { api } from "../../../Constants";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import moment from "moment";
 const SignUpScreen2 = (props) => {
   const navigation = useNavigation();
   const { firstName, lastName, phone, password, email } = props.route.params;
   const [random, setRandom] = useState();
   const [counter, setCounter] = useState(59);
-
+  const date1 = moment().add(1, "months").format();
   useEffect(() => {
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
@@ -35,6 +36,7 @@ const SignUpScreen2 = (props) => {
         email: email,
         password: password,
         random: random,
+        deadline: date1,
       })
       .then((res) => {
         navigation.navigate("AfterLoginScreen", {

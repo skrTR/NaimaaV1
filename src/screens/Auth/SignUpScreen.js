@@ -20,11 +20,11 @@ const SignUpScreen = () => {
   const state = useContext(UserContext);
   const navigation = useNavigation();
   const [reading, setReading] = useState(false);
-  const [phone, setPhone] = useState("97014400");
-  const [password, setPassword] = useState("123456");
-  const [password1, setPassword1] = useState("123456");
-  const [firstName, setFirstName] = useState("Tselmen");
-  const [email, setEmail] = useState("scarynomi@gmail.com");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
   const [isSecure, setIsSecure] = useState(true);
   const login = () => {
     if (phone.length < 6) {
