@@ -24,7 +24,6 @@ const SignUpScreen2 = (props) => {
   useEffect(() => {
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-
     return () => clearInterval(timer);
   }, [counter]);
   const signUpHandler = () => {
@@ -59,7 +58,7 @@ const SignUpScreen2 = (props) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: "white" }}
     >
       <AntDesign
         name="left"
@@ -72,8 +71,7 @@ const SignUpScreen2 = (props) => {
         <Image
           source={require("../../../assets/ioslogo.png")}
           style={{
-            flex: 1,
-            height: 250,
+            height: 150,
             width: "90%",
             resizeMode: "contain",
             alignSelf: "center",
@@ -99,7 +97,7 @@ const SignUpScreen2 = (props) => {
           Таны оруулсан <Text>{phone}</Text> дугаар луу 4 оронтой код явуулсан.
         </Text>
         <View
-          style={{ flex: 2, marginTop: 20, bottom: 20, marginHorizontal: 20 }}
+          style={{ flex: 1, marginTop: 20, bottom: 20, marginHorizontal: 20 }}
         >
           <OTPInputView
             pinCount={4}
@@ -114,42 +112,46 @@ const SignUpScreen2 = (props) => {
             }}
           />
           {counter > 0 ? (
-            <Text style={{ textAlign: "right", marginRight: 10 }}>
+            <Text
+              style={{
+                textAlign: "right",
+                marginRight: 10,
+                paddingBottom: 100,
+              }}
+            >
               {" "}
               Дахин мессеж илгээх 00:{counter}{" "}
             </Text>
           ) : (
-            <TouchableOpacity
+            <Text
               style={{
+                textAlign: "right",
                 marginRight: 10,
-                backgroundColor: "#175E26",
-                alignSelf: "flex-end",
-                padding: 10,
-                borderRadius: 10,
+                paddingBottom: 100,
               }}
               onPress={() => {
                 sendMessage();
                 setCounter(59);
               }}
             >
-              <Text style={{ textAlign: "right" }}>Дахин мессеж илгээх</Text>
-            </TouchableOpacity>
+              Дахин мессеж илгээх
+            </Text>
           )}
-
-          <TouchableOpacity
-            style={{
-              alignItems: "center",
-              backgroundColor: "#175E26",
-              padding: 10,
-              marginTop: 20,
-              borderRadius: 20,
-            }}
-            onPress={signUpHandler}
-          >
-            <Text style={{ color: "white" }}>Бүртгүүлэх</Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
+      <TouchableOpacity
+        style={{
+          alignItems: "center",
+          backgroundColor: "#175E26",
+          padding: 10,
+          marginTop: 20,
+          borderRadius: 20,
+          marginBottom: 10,
+        }}
+        onPress={signUpHandler}
+      >
+        <Text style={{ color: "white" }}>Бүртгүүлэх</Text>
+      </TouchableOpacity>
     </KeyboardAvoidingView>
   );
 };

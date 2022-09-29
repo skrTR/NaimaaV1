@@ -2,7 +2,7 @@
   "expo": {
     "name": "Naimaa",
     "slug": "Naimaa-naimaa",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "orientation": "portrait",
     "icon": "./assets/ioslogo.png",
     "userInterfaceStyle": "light",
@@ -18,7 +18,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "net.naimaa",
-      "buildNumber": "0.1.1",
+      "buildNumber": "0.1.2",
       "entitlements": {
         "com.apple.developer.networking.wifi-info": true
       }

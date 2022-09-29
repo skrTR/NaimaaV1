@@ -20,15 +20,19 @@ const SignUpScreen = () => {
   const state = useContext(UserContext);
   const navigation = useNavigation();
   const [reading, setReading] = useState(false);
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("97014400");
+  const [password, setPassword] = useState("123456");
+  const [password1, setPassword1] = useState("123456");
+  const [firstName, setFirstName] = useState("Tselmen");
+  const [email, setEmail] = useState("scarynomi@gmail.com");
   const [isSecure, setIsSecure] = useState(true);
   const login = () => {
     if (phone.length < 6) {
       Alert.alert("Та утасны дугаараа бичнэ үү");
+      return;
+    }
+    if (firstName.length < 2) {
+      Alert.alert("Та өөрийн нэрийг оруулна уу");
       return;
     }
     if (password !== password1) {
