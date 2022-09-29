@@ -9,7 +9,6 @@ import AddProductModal from "../screens/Trade/AddProductModal";
 import PhotoByBasket from "../screens/Trade/PhotoByBasket";
 import ResultBarcodeData from "../screens/Trade/ResultBarcodeData";
 import SearchByPhoto from "../screens/Trade/SearchByPhoto";
-import TradePhotoScreen from "../screens/Trade/TradePhotoScreen";
 import TradeScreen from "../screens/Trade/TradeScreen";
 
 const TradeStack = () => {
@@ -21,11 +20,7 @@ const TradeStack = () => {
         component={TradeScreen}
         options={{ headerShown: false }}
       />
-      <TradeStack.Screen
-        name="TradePhotoScreen"
-        component={TradePhotoScreen}
-        options={{}}
-      />
+
       <TradeStack.Screen
         name="AddProductModal"
         component={AddProductModal}

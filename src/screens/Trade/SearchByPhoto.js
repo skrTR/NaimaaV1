@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "../../../Constants";
 import { useNavigation } from "@react-navigation/native";
+import Empty from "../../components/Empty";
 
 const SearchByPhoto = () => {
   const [photo, setPhoto] = useState([]);
@@ -25,28 +26,32 @@ const SearchByPhoto = () => {
 
   return (
     <>
-      <FlatList
-        data={photo}
-        numColumns={3}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("PhotoByBasket", { data: item })
-              }
-            >
-              <Image
-                source={{ uri: `${api}/upload/${item.photo}` }}
-                style={{
-                  width: 120,
-                  height: 120,
-                  margin: 5,
-                }}
-              />
-            </TouchableOpacity>
-          );
-        }}
-      />
+      {photo.length > 0 ? (
+        <FlatList
+          data={photo}
+          numColumns={3}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("PhotoByBasket", { data: item })
+                }
+              >
+                <Image
+                  source={{ uri: `${api}/upload/${item.photo}` }}
+                  style={{
+                    width: 120,
+                    height: 120,
+                    margin: 5,
+                  }}
+                />
+              </TouchableOpacity>
+            );
+          }}
+        />
+      ) : (
+        <Empty text={"Танд бүртгэлтэй бараа байхгүй байна."} />
+      )}
     </>
   );
 };
