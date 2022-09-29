@@ -14,18 +14,12 @@ import {
   AntDesign,
 } from "@expo/vector-icons";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import axios from "axios";
-import { api } from "../../../Constants";
+import { useNavigation } from "@react-navigation/native";
+import { DataTable } from "react-native-paper";
 const IncomeBarCodeSearch = (props) => {
-  const {
-    setIncomeBarcode,
-    incomeBarcode,
-    setBarcodeData,
-    setBarcode,
-    barcode,
-  } = props;
+  const { setBarcodeModal, barcodeModal } = props;
   const [hasPermission, setHasPermission] = useState(null);
-
+  const navigation = useNavigation();
   const [scanned, setScanned] = useState(false);
   useEffect(() => {
     (async () => {
@@ -35,7 +29,6 @@ const IncomeBarCodeSearch = (props) => {
   }, []);
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    setBarcode(data);
     Alert.alert("Баркод амжилттай уншигдлаа", `${data} таны уншуулсан баркод`, [
       {
         text: "Дахин уншуулах",
@@ -45,15 +38,8 @@ const IncomeBarCodeSearch = (props) => {
       {
         text: "Болсон",
         onPress: () => {
-          setIncomeBarcode(false);
-          axios
-            .get(`${api}/api/v1/goods/user?barCode=${data}`)
-            .then((res) => {
-              setBarcodeData(res.data.data);
-            })
-            .catch((err) => {
-              //console.log(err);
-            });
+          setBarcodeModal(false);
+          navigation.navigate("ResultBarcodeData", { id: data });
         },
       },
     ]);
@@ -61,12 +47,16 @@ const IncomeBarCodeSearch = (props) => {
   if (hasPermission === null) {
     return (
       <Text style={{ textAlign: "center", marginTop: 200 }}>
-        Requesting for camera permission
+        Та камера ийн эрх нээгээгүй байна
       </Text>
     );
   }
   if (hasPermission === false) {
-    return <Text style={{ textAlign: "center" }}>No access to camera</Text>;
+    return (
+      <Text style={{ textAlign: "center" }}>
+        Та камера ийн эрх нээгээгүй байна
+      </Text>
+    );
   }
   return (
     <View
@@ -75,34 +65,38 @@ const IncomeBarCodeSearch = (props) => {
         width: "100%",
         alignItems: "center",
         marginTop: 10,
+        marginBottom: 5,
       }}
     >
-      <TextInput
-        placeholder="Баркодоор хайх"
-        style={{
-          borderWidth: 1,
-          borderColor: "#D9D9D9",
-          padding: 10,
-          width: "100%",
-          ...props.style,
-          fontSize: 16,
-        }}
-        value={barcode}
-        onChangeText={setBarcode}
-      />
-
       <TouchableOpacity
-        style={{ right: 55, padding: 20 }}
-        onPress={() => setIncomeBarcode(true)}
+        style={{ width: "100%" }}
+        onPress={() => setBarcodeModal(true)}
       >
-        <MaterialCommunityIcons name="barcode-scan" size={24} color="black" />
+        <Text
+          style={{
+            borderWidth: 1,
+            borderColor: "#D9D9D9",
+            padding: 10,
+            fontSize: 16,
+            color: "#ccc",
+          }}
+        >
+          Баркодоор хайх
+        </Text>
+
+        <MaterialCommunityIcons
+          name="barcode-scan"
+          size={24}
+          color="black"
+          style={{ position: "absolute", right: 10, bottom: 0, top: 6 }}
+        />
       </TouchableOpacity>
       <Modal
         animationType="slide"
         transparent={true}
-        visible={incomeBarcode}
+        visible={barcodeModal}
         onRequestClose={() => {
-          setIncomeBarcode(!incomeBarcode);
+          setBarcodeModal(!barcodeModal);
         }}
       >
         <View style={styles.centeredView1}>
@@ -123,7 +117,7 @@ const IncomeBarCodeSearch = (props) => {
               />
             </View>
             <TouchableOpacity
-              onPress={() => setIncomeBarcode(!incomeBarcode)}
+              onPress={() => setBarcodeModal(!barcodeModal)}
               style={{ position: "absolute", padding: 20, right: 0 }}
             >
               <Ionicons name="backspace-outline" size={24} color="black" />

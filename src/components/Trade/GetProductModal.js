@@ -299,7 +299,9 @@ const GetProductModal = (props) => {
                 ? postIncome
                 : isLoan === 2
                 ? postIncomeOnline
-                : isLoan === 3 && postLoanIncome
+                : isLoan === 3
+                ? postLoanIncome
+                : null
             }
           >
             <Text style={[styles.textStyle, { fontSize: 16 }]}>Болсон</Text>

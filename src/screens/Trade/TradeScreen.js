@@ -1,62 +1,23 @@
-import {
-  ScrollView,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Text,
-} from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, Image } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import TradeHeader from "../../components/Trade/TradeHeader";
-import IncomeBarCodeSearch from "../../components/Trade/IncomeBarCodeSearch";
-import TradeCategory from "../../components/Trade/TradeCategory";
-import SearchName from "../../components/Trade/SearchName";
-import ResultedProduct from "../../components/Trade/ResultedProduct";
-import BasketTable from "../../components/Trade/BasketTable";
+
+import UserContext from "../../context/UserContex";
+
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import IncomeScreen from "./IncomeScreen";
+import OutcomeScreen from "./OutcomeScreen";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import axios from "axios";
 import { api } from "../../../Constants";
-import GetProductModal from "../../components/Trade/GetProductModal";
-import GetDrainModal from "../../components/Trade/GetDrainModal";
-import Empty from "../../components/Empty";
-import UserContext from "../../context/UserContex";
-import Loading from "../../components/Loading";
 import PaymentScreen from "../Payment/PaymentScreen";
 const TradeScreen = () => {
   const navigation = useNavigation();
-  const isFocused = useIsFocused();
   const state = useContext(UserContext);
+  const isFocused = useIsFocused();
+  const Tab = createMaterialTopTabNavigator();
+  const insents = useSafeAreaInsets();
   const [time, setTime] = useState([]);
-  const [enabled, setEnabled] = useState(false);
-  // BarcodeModal
-  const [incomeBarcode, setIncomeBarcode] = useState(false);
-  // Barcoded ilersen data
-  const [barcodeData, setBarcodeData] = useState([]);
-  // categoryModal
-  const [categoryModal, setCategoryModal] = useState(false);
-  // SearchByName
-  const [filterData, setFilterData] = useState([]);
-  // Resulted product modal
-  const [priceModal, setPriceModal] = useState(false);
-  // Sags
-  const [basket, setBasket] = useState([]);
-  // Refresh
-  const [refresh, setRefresh] = useState(false);
-  // isLoan
-  const [loanModal, setLoanModal] = useState(false);
-  const [drainModal, setDrainModal] = useState(false);
-  const [search, setSearch] = useState("");
-  const [barcode, setBarcode] = useState("");
-  const getBasketData = () => {
-    axios
-      .get(`${api}/api/v1/transactions/basket?limit=100&sort=-createdAt`)
-      .then((res) => {
-        setBasket(res.data.data);
-      })
-      .catch((err) => {
-        //console.log(err);
-      });
-  };
   const getUserData = () => {
     axios
       .get(`${api}/api/v1/users/${state.userId}`)
@@ -68,200 +29,71 @@ const TradeScreen = () => {
       });
   };
   useEffect(() => {
-    getBasketData();
     getUserData();
-    setRefresh(false);
-  }, [refresh, isFocused]);
+  }, [isFocused]);
   return (
     <>
-      {!time ? (
-        <PaymentScreen />
-      ) : (
+      {time ? (
         <View
           style={{
-            opacity: incomeBarcode
-              ? 0.1
-              : categoryModal
-              ? 0.2
-              : priceModal
-              ? 0.2
-              : loanModal
-              ? 0.2
-              : drainModal
-              ? 0.2
-              : 1,
             height: "100%",
           }}
         >
           {/* header */}
-          <TradeHeader enabled={enabled} changeEnabled={setEnabled} />
-          <ScrollView style={{}}>
-            <View style={{ marginHorizontal: 20 }}>
-              {/* SearchBarCode */}
-              <IncomeBarCodeSearch
-                setIncomeBarcode={setIncomeBarcode}
-                incomeBarcode={incomeBarcode}
-                setBarcodeData={setBarcodeData}
-                setBarcode={setBarcode}
-                barcode={barcode}
-              />
-              {/* Category, search by name, search by photo */}
-              <View
-                style={{
-                  flexDirection: "row",
-                }}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              backgroundColor: "#175E26",
+              paddingTop: insents.top,
+            }}
+          >
+            <Image
+              source={require("../../../assets/logo.png")}
+              style={{
+                resizeMode: "contain",
+                height: 50,
+                width: 50,
+                marginLeft: 20,
+              }}
+            />
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("RegisterScreen")}
               >
-                {/* Cateogry */}
-                <TradeCategory
-                  categoryModal={categoryModal}
-                  setCategoryModal={setCategoryModal}
-                />
-                {/* Search by name */}
-                <SearchName
-                  setFilterData={setFilterData}
-                  search={search}
-                  setSearch={setSearch}
-                />
-                {/* Search by photo */}
-                <TouchableOpacity
+                <Text
                   style={{
-                    borderWidth: 1,
-                    borderColor: "#c4c4c4",
-                    padding: 5,
+                    color: "white",
+                    fontWeight: "bold",
+                    marginRight: 20,
                   }}
-                  onPress={() => navigation.navigate("SearchByPhoto")}
                 >
-                  <Ionicons name="images-outline" size={25} color="black" />
-                </TouchableOpacity>
-              </View>
-              {!enabled && (
-                <TouchableOpacity
-                  style={{
-                    alignItems: "center",
-                    backgroundColor: "#175E26",
-                    padding: 10,
-                    borderRadius: 10,
-                    marginVertical: 10,
-                  }}
-                  onPress={() => navigation.navigate("AddProductModal")}
-                >
-                  <Text style={{ color: "white", fontSize: 18 }}>
-                    Бараа бүртгэх
-                  </Text>
-                </TouchableOpacity>
-              )}
+                  {state.phone}
+                </Text>
+              </TouchableOpacity>
             </View>
-            {/* Onresulted product */}
-            {filterData && filterData.length > 0 ? (
-              <View>
-                {barcodeData.length > 0 ? (
-                  <ResultedProduct
-                    barcodeData={barcodeData}
-                    priceModal={priceModal}
-                    setPriceModal={setPriceModal}
-                    setRefresh={setRefresh}
-                    enabled={enabled}
-                  />
-                ) : (
-                  <ResultedProduct
-                    barcodeData={filterData}
-                    priceModal={priceModal}
-                    setPriceModal={setPriceModal}
-                    setRefresh={setRefresh}
-                    enabled={enabled}
-                  />
-                )}
-              </View>
-            ) : (
-              <Empty text={search} />
-            )}
+          </View>
 
-            {/* Basket */}
-            {basket.length > 0 && (
-              <View style={{ marginTop: 20 }}>
-                <View
-                  style={{
-                    backgroundColor: "#FF9B05",
-                    marginLeft: 20,
-                    borderTopLeftRadius: 20,
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "white",
-                      padding: 10,
-                      marginLeft: 20,
-                    }}
-                  >
-                    Сагсанд оногдсон бараа
-                  </Text>
-                </View>
-                <BasketTable basket={basket} setRefresh={setRefresh} />
-              </View>
-            )}
-            <View style={{ marginVertical: 50 }} />
-          </ScrollView>
-          {basket.length > 0 && (
-            <>
-              {enabled ? (
-                <TouchableOpacity
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    alignItems: "center",
-                    backgroundColor: "red",
-                    padding: 10,
-                    marginHorizontal: 20,
-                    borderRadius: 10,
-                    marginBottom: 10,
-                  }}
-                  onPress={() => setDrainModal(true)}
-                >
-                  <Text style={{ color: "white", fontSize: 18 }}>
-                    Зарлага гаргах
-                  </Text>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    alignItems: "center",
-                    backgroundColor: "#175E26",
-                    padding: 10,
-                    marginHorizontal: 20,
-                    borderRadius: 10,
-                    marginBottom: 10,
-                  }}
-                  onPress={() => setLoanModal(true)}
-                >
-                  <Text style={{ color: "white", fontSize: 18 }}>
-                    Орлого авах
-                  </Text>
-                </TouchableOpacity>
-              )}
-            </>
-          )}
+          <Tab.Navigator
+            screenOptions={{
+              tabBarStyle: { backgroundColor: "#175E26" },
+              tabBarLabelStyle: {
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 13,
+              },
+              tabBarIndicatorStyle: {
+                backgroundColor: "#FF9B05",
+                paddingVertical: 2,
+              },
+            }}
+          >
+            <Tab.Screen name="Орлого" component={IncomeScreen} />
+            <Tab.Screen name="Зарлага" component={OutcomeScreen} />
+          </Tab.Navigator>
         </View>
-      )}
-
-      {enabled ? (
-        <GetDrainModal
-          setDrainModal={setDrainModal}
-          drainModal={drainModal}
-          setRefresh={setRefresh}
-        />
       ) : (
-        <GetProductModal
-          setLoanModal={setLoanModal}
-          loanModal={loanModal}
-          setRefresh={setRefresh}
-        />
+        <PaymentScreen />
       )}
     </>
   );

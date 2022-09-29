@@ -13,7 +13,7 @@ import axios from "axios";
 import { api } from "../../../Constants";
 const GetDrainModal = (props) => {
   const { drainModal, setDrainModal, setRefresh } = props;
-  const [isLoan, setIsLoan] = useState(false);
+  const [isLoan, setIsLoan] = useState(1);
   const [isTemplate, setIsTemplate] = useState(false);
   const [loanName, setLoanName] = useState("");
   const [loanPhone, setLoanPhone] = useState("");
@@ -28,7 +28,7 @@ const GetDrainModal = (props) => {
           // console.log(res.data.data, "template");
         })
         .catch((err) => {
-          // console.log(err);
+          //console.log(err);
         });
     }
     axios
@@ -38,18 +38,40 @@ const GetDrainModal = (props) => {
         setDrainModal(!drainModal);
       })
       .catch((err) => {
-        Alert.alert(err.response.data.error.message);
+        //console.log(err);
       });
   };
+  const postIncomeOnline = () => {
+    if (isTemplate) {
+      axios
+        .post(`${api}/api/v1/templates`, { name: templateName })
+        .then((res) => {
+          console.log(res.data.data, "template");
+        })
+        .catch((err) => {
+          //console.log(err);
+        });
+    }
+    axios
+      .post(`${api}/api/v1/bills/drain`, { incomeType: "Бэлэн бус" })
+      .then((res) => {
+        setRefresh(true);
+        setDrainModal(!drainModal);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   const postLoanIncome = () => {
     if (isTemplate) {
       axios
         .post(`${api}/api/v1/templates`, { name: templateName })
         .then((res) => {
-          // console.log(res.data.data, "template");
+          console.log(res.data.data, "template");
         })
         .catch((err) => {
-          // console.log(err);
+          //console.log(err);
         });
     }
     axios
@@ -63,10 +85,11 @@ const GetDrainModal = (props) => {
       .then((res) => {
         // console.log(res.data.data);
         setRefresh(true);
+
         setDrainModal(!drainModal);
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
       });
   };
   return (
@@ -92,28 +115,69 @@ const GetDrainModal = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setIsLoan(false)}
+              onPress={() => setIsLoan(1)}
             >
               <MaterialCommunityIcons
-                name={isLoan ? "checkbox-blank-outline" : "checkbox-marked"}
+                name={
+                  isLoan === 1 ? "checkbox-marked" : "checkbox-blank-outline"
+                }
                 size={24}
                 color="black"
               />
-              <Text>Бэлэнээр</Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: isLoan === 1 ? "700" : "500",
+                }}
+              >
+                Бэлнээр{" "}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setIsLoan(true)}
+              onPress={() => setIsLoan(2)}
             >
               <MaterialCommunityIcons
-                name={!isLoan ? "checkbox-blank-outline" : "checkbox-marked"}
+                name={
+                  isLoan === 2 ? "checkbox-marked" : "checkbox-blank-outline"
+                }
                 size={24}
                 color="black"
               />
-              <Text>Зээлээр</Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: isLoan === 2 ? "700" : "500",
+                }}
+              >
+                Бэлэн бус
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => setIsLoan(3)}
+            >
+              <MaterialCommunityIcons
+                name={
+                  isLoan === 3 ? "checkbox-marked" : "checkbox-blank-outline"
+                }
+                size={24}
+                color="black"
+              />
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: isLoan === 3 ? "700" : "500",
+                }}
+              >
+                Зээлээр
+              </Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -150,14 +214,14 @@ const GetDrainModal = (props) => {
               />
             </View>
           )}
-          {isLoan && (
+          {isLoan === 3 && (
             <View style={{ marginTop: 10 }}>
               <Text style={{ fontWeight: "bold", fontSize: 16 }}>
                 Зээлдэгчийн нэр
               </Text>
               <TextInput
                 placeholder="Зээлдэгчийн нэр"
-                keyboardType="numeric"
+                keyboardType="default"
                 style={{
                   borderWidth: 1,
                   padding: 3,
@@ -174,10 +238,10 @@ const GetDrainModal = (props) => {
                   marginTop: 10,
                 }}
               >
-                Зээлдэгчийн дугаар
+                Зээлдэгчийн утасны дугаар
               </Text>
               <TextInput
-                placeholder="Зээлдэгчийн дугаар"
+                placeholder="Зээлдэгчийн утасны дугаар"
                 style={{
                   borderWidth: 1,
                   padding: 3,
@@ -186,6 +250,7 @@ const GetDrainModal = (props) => {
                 placeholderTextColor={"grey"}
                 value={loanPhone}
                 onChangeText={setLoanPhone}
+                keyboardType={"number-pad"}
               />
               <Text
                 style={{
@@ -198,6 +263,7 @@ const GetDrainModal = (props) => {
               </Text>
               <TextInput
                 placeholder="Зээлсэн хэмжээ"
+                keyboardType="numeric"
                 style={{
                   borderWidth: 1,
                   padding: 3,
@@ -231,7 +297,15 @@ const GetDrainModal = (props) => {
           )}
           <TouchableOpacity
             style={[styles.button, styles.buttonClose]}
-            onPress={isLoan ? postLoanIncome : postIncome}
+            onPress={
+              isLoan === 1
+                ? postIncome
+                : isLoan === 2
+                ? postIncomeOnline
+                : isLoan === 3
+                ? postLoanIncome
+                : null
+            }
           >
             <Text style={styles.textStyle}>Зарлага гаргах</Text>
           </TouchableOpacity>

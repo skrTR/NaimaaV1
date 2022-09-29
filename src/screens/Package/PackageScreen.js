@@ -14,6 +14,7 @@ import UserContext from "../../context/UserContex";
 import moment from "moment";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import PaymentScreen from "../Payment/PaymentScreen";
+import Empty from "../../components/Empty";
 const PackageScreen = () => {
   const [data, setData] = useState([]);
   const isFocused = useIsFocused();
@@ -52,42 +53,48 @@ const PackageScreen = () => {
           <Text style={{ margin: 20, fontWeight: "bold", fontSize: 18 }}>
             Загвар гүйлгээнүүд
           </Text>
-          <FlatList
-            data={data}
-            renderItem={({ item }) => {
-              return (
-                <TouchableOpacity
-                  style={{
-                    borderWidth: 1,
-                    marginVertical: 5,
-                    padding: 5,
-                    marginHorizontal: 10,
-                    borderRadius: 10,
-                    borderColor: "#cccccccc",
-                  }}
-                  onPress={() =>
-                    navigation.navigate("PackageDetailScreen", { id: item._id })
-                  }
-                >
-                  <View
+          {data.length > 0 ? (
+            <FlatList
+              data={data}
+              renderItem={({ item }) => {
+                return (
+                  <TouchableOpacity
                     style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
+                      borderWidth: 1,
+                      marginVertical: 5,
+                      padding: 5,
+                      marginHorizontal: 10,
+                      borderRadius: 10,
+                      borderColor: "#cccccccc",
                     }}
+                    onPress={() =>
+                      navigation.navigate("PackageDetailScreen", {
+                        id: item._id,
+                      })
+                    }
                   >
-                    <Text>{item.name}</Text>
-                    <FontAwesome
-                      name="angle-double-right"
-                      size={18}
-                      color="black"
-                      style={{ top: 6, right: 5 }}
-                    />
-                  </View>
-                  <Text>{moment(item.createdAt).fromNow()} </Text>
-                </TouchableOpacity>
-              );
-            }}
-          />
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Text>{item.name}</Text>
+                      <FontAwesome
+                        name="angle-double-right"
+                        size={18}
+                        color="black"
+                        style={{ top: 6, right: 5 }}
+                      />
+                    </View>
+                    <Text>{moment(item.createdAt).fromNow()} </Text>
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          ) : (
+            <Empty text={"Та загвар гүйлгээ хадгалаагүй байна"} />
+          )}
         </View>
       ) : (
         <PaymentScreen />

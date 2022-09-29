@@ -1,8 +1,4 @@
-import {
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { TextInput, TouchableOpacity, ScrollView } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import { api } from "../../../Constants";
 import { DataTable } from "react-native-paper";
@@ -125,7 +121,7 @@ const ListScreen = (props) => {
                   })}
               </DataTable>
             ) : (
-              <Empty text={search} />
+              <Empty text={`${search} таны хайсан бараа байхгүй байна`} />
             )}
           </ScrollView>
         </>

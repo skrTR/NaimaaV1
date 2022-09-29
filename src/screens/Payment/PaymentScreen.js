@@ -14,6 +14,7 @@ const PaymentScreen = () => {
   const navigation = useNavigation();
   const state = useContext(UserContext);
   const [data, setData] = useState([]);
+
   const getUserData = () => {
     axios
       .get(`${api}/api/v1/users/${state.userId}?select=deadline`)
@@ -21,7 +22,10 @@ const PaymentScreen = () => {
         setData(res.data.data.deadline);
       })
       .catch((err) => {
-        console.log(err);
+        let message = err.response.data.error.message;
+        if (message === `${state.userId} ID-тэй хэрэглэгч байхгүй!`) {
+          state.logout();
+        }
       });
   };
   const logout = () => {

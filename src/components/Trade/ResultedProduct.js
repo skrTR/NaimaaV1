@@ -56,8 +56,6 @@ const ResultedProduct = (props) => {
               <View key={e._id}>
                 <DataTable.Row>
                   <DataTable.Cell textStyle={{ fontSize: 16 }}>
-                    {/* <AntDesign name="staro" size={15} color="#FF9B05" /> */}
-                    {/* <AntDesign name="star" size={24} color="black" /> */}
                     {e.name}
                   </DataTable.Cell>
                   <DataTable.Cell numeric>

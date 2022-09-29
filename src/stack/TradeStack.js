@@ -7,6 +7,7 @@ import DateExtendScreen from "../screens/Payment/DateExtendScreen";
 import QpayModal from "../screens/Payment/QpayModal";
 import AddProductModal from "../screens/Trade/AddProductModal";
 import PhotoByBasket from "../screens/Trade/PhotoByBasket";
+import ResultBarcodeData from "../screens/Trade/ResultBarcodeData";
 import SearchByPhoto from "../screens/Trade/SearchByPhoto";
 import TradePhotoScreen from "../screens/Trade/TradePhotoScreen";
 import TradeScreen from "../screens/Trade/TradeScreen";
@@ -67,6 +68,15 @@ const TradeStack = () => {
         options={{
           presentation: "formSheet",
           title: "Бараа засах",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <TradeStack.Screen
+        name="ResultBarcodeData"
+        component={ResultBarcodeData}
+        options={{
+          presentation: "formSheet",
+          title: "Баркодooр илэрсэн бараа",
           headerLeft: () => <MyBackButton />,
         }}
       />
