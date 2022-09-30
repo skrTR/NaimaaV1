@@ -23,11 +23,8 @@ const RegisterScreen = () => {
   const [deadLine, setDeadLine] = useState([]);
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
-  const animationRef = useRef(null);
   const isFocused = useIsFocused();
-  useEffect(() => {
-    animationRef.current?.play();
-  }, []);
+
   const getUserData = () => {
     axios
       .get(`${api}/api/v1/users/${state.userId}`)
@@ -38,6 +35,30 @@ const RegisterScreen = () => {
       .catch((err) => {
         // console.log(err);
       });
+  };
+  const userDelete = () => {
+    Alert.alert("Та өөрийн профайл устгахдаа", "итгэлтэй байна уу?", [
+      {
+        text: "Болих",
+        onPress: () => {
+          console.log("Cancel Pressed");
+        },
+        style: "cancel",
+      },
+      {
+        text: "Устгах",
+        onPress: () => {
+          axios
+            .delete(`${api}/api/v1/users/${state.userId}`)
+            .then((res) => {
+              state.logout();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        },
+      },
+    ]);
   };
   useEffect(() => {
     getUserData();
@@ -205,6 +226,31 @@ const RegisterScreen = () => {
           >
             <MaterialIcons name="logout" size={24} color="black" />
             <Text style={{ fontWeight: "600", fontSize: 15 }}> Гарах</Text>
+          </TouchableOpacity>
+          <View
+            style={{
+              borderWidth: 1,
+              borderColor: "#cccccccc",
+              marginHorizontal: 10,
+              marginBottom: 10,
+            }}
+          />
+          {/* Аккоунтаа устгах */}
+          <TouchableOpacity
+            onPress={userDelete}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginHorizontal: 10,
+              alignContent: "center",
+              marginBottom: 5,
+            }}
+          >
+            <MaterialIcons name="restore-from-trash" size={24} color="black" />
+            <Text style={{ fontWeight: "600", fontSize: 15 }}>
+              {" "}
+              Аккоунт устгах
+            </Text>
           </TouchableOpacity>
           <View
             style={{

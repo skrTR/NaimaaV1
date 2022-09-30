@@ -2,7 +2,7 @@
   "expo": {
     "name": "Naimaa",
     "slug": "Naimaa-naimaa",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "orientation": "portrait",
     "icon": "./assets/ioslogo.png",
     "userInterfaceStyle": "light",
@@ -18,21 +18,24 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "net.naimaa",
-      "buildNumber": "0.1.6",
+      "buildNumber": "0.1.7",
       "entitlements": {
         "com.apple.developer.networking.wifi-info": true
+      },
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Access to your photo library is required to attach photos to scan qr code or product images upload."
       }
     },
     "plugins": [
       [
         "expo-image-picker",
         {
-          "photosPermission": "The app accesses your photos to let you share them with your friends."
+          "photosPermission": "Access to your photo library is required to attach photos to scan qr code or product images upload."
         }
       ]
     ],
     "android": {
-      "versionCode": 16,
+      "versionCode": 17,
       "package": "mn.naimaa",
       "permissions": ["CAMERA", "WRITE_EXTERNAL_STORAGE", "CAMERA_ROLL"],
       "adaptiveIcon": {
