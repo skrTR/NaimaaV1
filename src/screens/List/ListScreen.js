@@ -1,35 +1,22 @@
 import { TextInput, TouchableOpacity, ScrollView } from "react-native";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { api } from "../../../Constants";
 import { DataTable } from "react-native-paper";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import Empty from "../../components/Empty";
 import Header from "../../components/Header";
-import axios from "axios";
-import UserContext from "../../context/UserContex";
 import PaymentScreen from "../Payment/PaymentScreen";
-const ListScreen = (props) => {
+import useCheck from "../hooks/useCheck";
+const ListScreen = () => {
   const [filterData, setFilterData] = useState([]);
-  const state = useContext(UserContext);
-  const [time, setTime] = useState([]);
   const [masterData, setMasterData] = useState([]);
   const [search, setSearch] = useState("");
   const isFocused = useIsFocused();
   const navigation = useNavigation();
-  const getUserData = () => {
-    axios
-      .get(`${api}/api/v1/users/${state.userId}`)
-      .then((res) => {
-        setTime(res.data.time);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  };
+  const [time] = useCheck();
+
   useEffect(() => {
     fetchCompany();
-    getUserData();
-    return () => {};
   }, [isFocused]);
   const fetchCompany = () => {
     const apiURL = `${api}/api/v1/goods/user?limit=100`;

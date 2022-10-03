@@ -1,29 +1,13 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import Header from "../../components/Header";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import { api } from "../../../Constants";
+import { useNavigation } from "@react-navigation/native";
 import PaymentScreen from "../Payment/PaymentScreen";
-import UserContext from "../../context/UserContex";
+import useCheck from "../hooks/useCheck";
 const ReportScreen = () => {
   const navigation = useNavigation();
-  const state = useContext(UserContext);
-  const isFocused = useIsFocused();
-  const [time, setTime] = useState([]);
-  const getUserData = () => {
-    axios
-      .get(`${api}/api/v1/users/${state.userId}`)
-      .then((res) => {
-        setTime(res.data.time);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  };
-  useEffect(() => {
-    getUserData();
-  }, [isFocused]);
+  const [time] = useCheck();
+
   return (
     <>
       {time ? (

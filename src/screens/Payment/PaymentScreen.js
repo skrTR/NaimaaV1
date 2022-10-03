@@ -24,6 +24,13 @@ const PaymentScreen = () => {
       .catch((err) => {
         let message = err.response.data.error.message;
         if (message === `${state.userId} ID-тэй хэрэглэгч байхгүй!`) {
+          alert("Аккоунт устгагдсан эсвэл алдаа гарлаа дахин нэвтрэнэ үү");
+          state.logout();
+        } else if (
+          message ===
+          "Энэ үйлдлийг хийхэд таны эрх хүрэхгүй байна. Та эхлээд логин хийнэ үү. Authorization header-ээр эсвэ Cookie ашиглан токеноо дамжуулна уу."
+        ) {
+          alert("Алдаа гарлаа та дахин нэвтрэнэ үү");
           state.logout();
         }
       });

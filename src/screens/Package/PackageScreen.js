@@ -15,22 +15,14 @@ import moment from "moment";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import PaymentScreen from "../Payment/PaymentScreen";
 import Empty from "../../components/Empty";
+import useCheck from "../hooks/useCheck";
 const PackageScreen = () => {
   const [data, setData] = useState([]);
   const isFocused = useIsFocused();
   const state = useContext(UserContext);
   const navigation = useNavigation();
-  const [time, setTime] = useState([]);
-  const getUserData = () => {
-    axios
-      .get(`${api}/api/v1/users/${state.userId}`)
-      .then((res) => {
-        setTime(res.data.time);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  };
+  const [time] = useCheck();
+
   const getData = () => {
     axios
       .get(`${api}/api/v1/templates?createUser=${state.userId}`)
@@ -43,7 +35,6 @@ const PackageScreen = () => {
   };
   useEffect(() => {
     getData();
-    getUserData();
   }, [isFocused]);
   return (
     <>

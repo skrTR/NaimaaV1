@@ -1,6 +1,6 @@
 import { StyleSheet, View, TouchableOpacity, Text, Image } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
+import React, { useContext } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import UserContext from "../../context/UserContex";
 
@@ -8,29 +8,15 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import IncomeScreen from "./IncomeScreen";
 import OutcomeScreen from "./OutcomeScreen";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import axios from "axios";
-import { api } from "../../../Constants";
 import PaymentScreen from "../Payment/PaymentScreen";
+import useCheck from "../hooks/useCheck";
 const TradeScreen = () => {
   const navigation = useNavigation();
   const state = useContext(UserContext);
-  const isFocused = useIsFocused();
   const Tab = createMaterialTopTabNavigator();
   const insents = useSafeAreaInsets();
-  const [time, setTime] = useState([]);
-  const getUserData = () => {
-    axios
-      .get(`${api}/api/v1/users/${state.userId}`)
-      .then((res) => {
-        setTime(res.data.time);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  };
-  useEffect(() => {
-    getUserData();
-  }, [isFocused]);
+  const [time] = useCheck();
+
   return (
     <>
       {time ? (
