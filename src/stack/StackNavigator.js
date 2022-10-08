@@ -27,7 +27,7 @@ const StackNavigator = () => {
     <>
       {state.isLoggedIn ? (
         <Tab.Navigator
-          initialRouteName="Ажил хийе"
+          initialRouteName="Наймаа"
           // sceneContainerStyle={{ backgroundColor: colors.background }}
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
@@ -38,7 +38,7 @@ const StackNavigator = () => {
                 iconName = focused ? "sort-numeric-asc" : "sort-numeric-asc";
               } else if (route.name === "Бараа") {
                 iconName = focused ? "th-list" : "th-list";
-              } else if (route.name === "Багц") {
+              } else if (route.name === "Загвар") {
                 iconName = focused ? "sitemap" : "sitemap";
               } else if (route.name === "Бүртгэл") {
                 iconName = focused ? "users" : "users";
@@ -69,7 +69,7 @@ const StackNavigator = () => {
             options={{ headerShown: false }}
           />
           <Tab.Screen
-            name="Багц"
+            name="Загвар"
             component={PackageStack}
             options={{ headerShown: false }}
           />

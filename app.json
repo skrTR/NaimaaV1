@@ -32,7 +32,7 @@
       },
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "Access to your photo library is required to attach photos to scan qr code or product images upload.",
-        "NSCameraUsageDescription": "Access to your camera is required to scan qr code or product images upload."
+        "NSCameraUsageDescription": "Naimaa requires access to your camera to goods photo to upload and goods scanning qr code"
       }
     },
 

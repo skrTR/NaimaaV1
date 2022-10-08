@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "../../../Constants";
 import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import moment from "moment";
 import Loading from "../../components/Loading";
 const ProductDetailScreen = ({ route }) => {
@@ -20,6 +20,7 @@ const ProductDetailScreen = ({ route }) => {
   const [trans, setTrans] = useState([]);
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
+  const isFocused = useIsFocused();
   useEffect(() => {
     axios
       .get(`${api}/api/v1/goods/${id}`)
@@ -32,13 +33,12 @@ const ProductDetailScreen = ({ route }) => {
     axios
       .get(`${api}/api/v1/transactions/user?good=${id}&sort=-createdAt`)
       .then((res) => {
-        console.log(res.data.data);
         setTrans(res.data.data);
       })
       .catch((err) => {
         //console.log(err);
       });
-  }, []);
+  }, [isFocused]);
   const deleteProduct = () => {
     Alert.alert(
       `Та ${productData.name} нэртэй барааг устгахдаа итгэлтэй байна уу`,

@@ -11,10 +11,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "../../../Constants";
 import PackageModal from "../../components/Package/PackageModal";
+import { useIsFocused } from "@react-navigation/native";
 
 const PackageDetailScreen = (props) => {
   const { id } = props.route.params;
   const [packageData, setPackageData] = useState([]);
+  const isFocused = useIsFocused();
   // isLoan
   const [loanModal, setLoanModal] = useState(false);
   const getPackageDetail = () => {
@@ -27,7 +29,7 @@ const PackageDetailScreen = (props) => {
   };
   useEffect(() => {
     getPackageDetail();
-  }, []);
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={{ opacity: loanModal ? 0.2 : 1 }}>

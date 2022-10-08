@@ -66,7 +66,12 @@ const BillDetailScreen = (props) => {
                   />
                   <View style={{ marginLeft: 5 }}>
                     <Text>Барааны нэр: {e.good.name}</Text>
-                    <Text>Орлогын төрөл: {e.incomeType}</Text>
+                    <Text>
+                      {type === "Орлого"
+                        ? "Орлогын төрөл: "
+                        : "Зарлагын төрөл: "}
+                      {e.incomeType}
+                    </Text>
                     <Text>Тоо ширхэг: {e.quantity}</Text>
                     <Text>Ширхэгийн үнэ: {e.price}</Text>
                     <Text>

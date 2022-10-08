@@ -12,7 +12,7 @@ import axios from "axios";
 import { api } from "../../../Constants";
 const PackageModal = (props) => {
   const { loanModal, setLoanModal, id } = props;
-  const [isLoan, setIsLoan] = useState(false);
+  const [isLoan, setIsLoan] = useState(1);
   const [isSum, setIsSum] = useState(false);
   const [loanName, setLoanName] = useState("Жак");
   const [loanPhone, setLoanPhone] = useState("99110401");
@@ -21,11 +21,12 @@ const PackageModal = (props) => {
   const postIncome = () => {
     axios
       .post(`${api}/api/v1/bills/${!isSum ? "receipt" : "drain"}`, {
-        incomeType: "Бэлэн",
+        incomeType: isLoan === 1 ? "Бэлэн" : isLoan === 2 ? "Бэлэн бус" : "",
         template: id,
       })
       .then((res) => {
         setLoanModal(!loanModal);
+        console.log(res.data.data);
       })
       .catch((err) => {
         // console.log(err);
@@ -108,10 +109,12 @@ const PackageModal = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setIsLoan(false)}
+              onPress={() => setIsLoan(1)}
             >
               <MaterialCommunityIcons
-                name={isLoan ? "checkbox-blank-outline" : "checkbox-marked"}
+                name={
+                  isLoan === 1 ? "checkbox-marked" : "checkbox-blank-outline"
+                }
                 size={24}
                 color="black"
               />
@@ -122,10 +125,28 @@ const PackageModal = (props) => {
                 flexDirection: "row",
                 alignItems: "center",
               }}
-              onPress={() => setIsLoan(true)}
+              onPress={() => setIsLoan(2)}
             >
               <MaterialCommunityIcons
-                name={!isLoan ? "checkbox-blank-outline" : "checkbox-marked"}
+                name={
+                  isLoan === 2 ? "checkbox-marked" : "checkbox-blank-outline"
+                }
+                size={24}
+                color="black"
+              />
+              <Text>Бэлэн бусаар</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => setIsLoan(3)}
+            >
+              <MaterialCommunityIcons
+                name={
+                  isLoan === 3 ? "checkbox-marked" : "checkbox-blank-outline"
+                }
                 size={24}
                 color="black"
               />
@@ -133,13 +154,13 @@ const PackageModal = (props) => {
             </TouchableOpacity>
           </View>
 
-          {isLoan && (
+          {isLoan === 3 && (
             <View style={{ marginTop: 10 }}>
               <Text style={{ fontWeight: "bold", fontSize: 16 }}>
-                Зээлдэгчийн нэр
+                Бэлтгэн нийлүүлэгчийн нэр
               </Text>
               <TextInput
-                placeholder="Зээлдэгчийн нэр"
+                placeholder="Бэлтгэн нийлүүлэгчийн нэр"
                 style={{
                   borderWidth: 1,
                   padding: 3,
@@ -156,10 +177,10 @@ const PackageModal = (props) => {
                   marginTop: 10,
                 }}
               >
-                Зээлдэгчийн дугаар
+                Бэлтгэн нийлүүлэгчийн дугаар
               </Text>
               <TextInput
-                placeholder="Зээлдэгчийн дугаар"
+                placeholder="Бэлтгэн нийлүүлэгчийн дугаар"
                 style={{
                   borderWidth: 1,
                   padding: 3,
@@ -176,10 +197,10 @@ const PackageModal = (props) => {
                   marginTop: 10,
                 }}
               >
-                Зээлсэн хэмжээ
+                3ээлсэн барааны тоо хэмжээ
               </Text>
               <TextInput
-                placeholder="Зээлсэн хэмжээ"
+                placeholder="3ээлсэн барааны тоо хэмжээ"
                 style={{
                   borderWidth: 1,
                   padding: 3,
@@ -196,10 +217,10 @@ const PackageModal = (props) => {
                   marginTop: 10,
                 }}
               >
-                Зээлсэн буцах хугацаа
+                Зээл төлөх хугацаа
               </Text>
               <TextInput
-                placeholder="Зээлсэн буцах хугацаа"
+                placeholder="Зээл төлөх хугацаа"
                 style={{
                   borderWidth: 1,
                   padding: 3,
@@ -213,7 +234,7 @@ const PackageModal = (props) => {
           )}
           <TouchableOpacity
             style={[styles.button, styles.buttonClose]}
-            onPress={isLoan ? postLoanIncome : postIncome}
+            onPress={isLoan === 3 ? postLoanIncome : postIncome}
           >
             <Text style={styles.textStyle}>Болсон</Text>
           </TouchableOpacity>

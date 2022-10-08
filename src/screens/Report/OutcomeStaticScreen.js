@@ -60,7 +60,7 @@ const OutcomeStaticScreen = () => {
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 ₮
               </Text>
-              <Text>Орлогын төрөл: {data.incomeType} </Text>
+              <Text>Зарлагын төрөл: {data.incomeType} </Text>
             </View>
             <Text>{moment(data.createdAt).format("YYYY-MM-DD")}</Text>
           </TouchableOpacity>

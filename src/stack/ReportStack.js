@@ -5,7 +5,6 @@ import ProductDetailScreen from "../screens/List/ProductDetailScreen";
 import DateExtendScreen from "../screens/Payment/DateExtendScreen";
 import QpayModal from "../screens/Payment/QpayModal";
 import AllReportScreen from "../screens/Report/AllReportScreen";
-import AllStaticScreen from "../screens/Report/AllStaticScreen";
 import BillDetailScreen from "../screens/Report/BillDetailScreen";
 import BoughtRemainderScreen from "../screens/Report/BoughtRemainderScreen";
 import IncomeStaticScreen from "../screens/Report/IncomeStaticScreen";
@@ -40,15 +39,7 @@ const ReportStack = () => {
           headerLeft: () => <MyBackButton />,
         }}
       />
-      <ReportStack.Screen
-        name="AllStaticScreen"
-        component={AllStaticScreen}
-        options={{
-          presentation: "formSheet",
-          title: "Бүх тайлан",
-          headerLeft: () => <MyBackButton />,
-        }}
-      />
+
       <ReportStack.Screen
         name="IncomeStaticScreen"
         component={IncomeStaticScreen}

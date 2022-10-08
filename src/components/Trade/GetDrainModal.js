@@ -130,7 +130,7 @@ const GetDrainModal = (props) => {
                   fontWeight: isLoan === 1 ? "700" : "500",
                 }}
               >
-                Бэлнээр{" "}
+                Бэлэнээр{" "}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -153,7 +153,7 @@ const GetDrainModal = (props) => {
                   fontWeight: isLoan === 2 ? "700" : "500",
                 }}
               >
-                Бэлэн бус
+                Бэлэн бусаар
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -217,10 +217,10 @@ const GetDrainModal = (props) => {
           {isLoan === 3 && (
             <View style={{ marginTop: 10 }}>
               <Text style={{ fontWeight: "bold", fontSize: 16 }}>
-                Зээлдэгчийн нэр
+                Бэлтгэн нийлүүлэгчийн нэр
               </Text>
               <TextInput
-                placeholder="Зээлдэгчийн нэр"
+                placeholder="Бэлтгэн нийлүүлэгчийн нэр"
                 keyboardType="default"
                 style={{
                   borderWidth: 1,
@@ -238,10 +238,10 @@ const GetDrainModal = (props) => {
                   marginTop: 10,
                 }}
               >
-                Зээлдэгчийн утасны дугаар
+                Бэлтгэн нийлүүлэгчийн дугаар
               </Text>
               <TextInput
-                placeholder="Зээлдэгчийн утасны дугаар"
+                placeholder="Бэлтгэн нийлүүлэгчийн дугаар"
                 style={{
                   borderWidth: 1,
                   padding: 3,
@@ -259,10 +259,10 @@ const GetDrainModal = (props) => {
                   marginTop: 10,
                 }}
               >
-                Зээлсэн хэмжээ
+                3ээлсэн барааны тоо хэмжээ
               </Text>
               <TextInput
-                placeholder="Зээлсэн хэмжээ"
+                placeholder="3ээлсэн барааны тоо хэмжээ"
                 keyboardType="numeric"
                 style={{
                   borderWidth: 1,
@@ -280,10 +280,10 @@ const GetDrainModal = (props) => {
                   marginTop: 10,
                 }}
               >
-                Зээлсэн буцах хугацаа
+                3ээл төлөх хугацаа
               </Text>
               <TextInput
-                placeholder="Зээлсэн буцах хугацаа"
+                placeholder="3ээл төлөх хугацаа"
                 style={{
                   borderWidth: 1,
                   padding: 3,

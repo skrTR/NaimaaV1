@@ -95,7 +95,7 @@ const LoanInfoModal = (props) => {
       <>
         <View style={{ flexDirection: "row" }}>
           <Text style={{ fontWeight: "bold", fontSize: 16 }}>
-            Зээлдэгчийн нэр:{" "}
+            Бэлтгэн нийлүүлэгчийн нэр:{" "}
           </Text>
           <Text style={{ fontWeight: "300", fontSize: 15 }}>
             {data.loanName}{" "}
@@ -110,7 +110,7 @@ const LoanInfoModal = (props) => {
         />
         <View style={{ flexDirection: "row" }}>
           <Text style={{ fontWeight: "bold", fontSize: 16 }}>
-            Зээлдэгчийн утас:{" "}
+            Бэлтгэн нийлүүлэгчийн дугаар:{" "}
           </Text>
           <Text style={{ fontWeight: "300", fontSize: 15 }}>
             {data.loanPhone}{" "}
@@ -170,7 +170,7 @@ const LoanInfoModal = (props) => {
         />
         <View style={{ flexDirection: "row" }}>
           <Text style={{ fontWeight: "bold", fontSize: 16 }}>
-            Зээлсэн хэмжээ:{" "}
+            3ээлсэн барааны тоо хэмжээ:{" "}
           </Text>
           <Text
             style={{

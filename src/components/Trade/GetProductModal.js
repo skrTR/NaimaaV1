@@ -130,7 +130,7 @@ const GetProductModal = (props) => {
                   fontWeight: isLoan === 1 ? "700" : "500",
                 }}
               >
-                Бэлнээр{" "}
+                Бэлэнээр{" "}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -153,7 +153,7 @@ const GetProductModal = (props) => {
                   fontWeight: isLoan === 2 ? "700" : "500",
                 }}
               >
-                Бэлэн бус
+                Бэлэн бусаар
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -217,10 +217,10 @@ const GetProductModal = (props) => {
           {isLoan === 3 && (
             <View style={{ marginTop: 10 }}>
               <Text style={{ fontWeight: "bold", fontSize: 16 }}>
-                Зээлдэгчийн нэр
+                Бэлтгэн нийлүүлэгчийн нэр
               </Text>
               <TextInput
-                placeholder="Зээлдэгчийн нэр"
+                placeholder="Бэлтгэн нийлүүлэгчийн нэр"
                 style={{
                   borderWidth: 1,
                   padding: 3,
@@ -237,10 +237,10 @@ const GetProductModal = (props) => {
                   marginTop: 10,
                 }}
               >
-                Зээлдэгчийн дугаар
+                Бэлтгэн нийлүүлэгчийн дугаар
               </Text>
               <TextInput
-                placeholder="Зээлдэгчийн дугаар"
+                placeholder="Бэлтгэн нийлүүлэгчийн дугаар"
                 style={{
                   borderWidth: 1,
                   padding: 3,
@@ -257,10 +257,10 @@ const GetProductModal = (props) => {
                   marginTop: 10,
                 }}
               >
-                Зээлсэн хэмжээ
+                3ээлсэн барааны тоо хэмжээ
               </Text>
               <TextInput
-                placeholder="Зээлсэн хэмжээ"
+                placeholder="3ээлсэн барааны тоо хэмжээ"
                 style={{
                   borderWidth: 1,
                   padding: 3,
@@ -277,10 +277,10 @@ const GetProductModal = (props) => {
                   marginTop: 10,
                 }}
               >
-                Зээлсэн буцах хугацаа
+                3ээл төлөх хугацаа
               </Text>
               <TextInput
-                placeholder="Зээлсэн буцах хугацаа"
+                placeholder="3ээл төлөх хугацаа"
                 style={{
                   borderWidth: 1,
                   padding: 3,

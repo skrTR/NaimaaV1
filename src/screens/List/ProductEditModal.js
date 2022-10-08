@@ -70,17 +70,20 @@ const ProductEditModal = (props) => {
         const newPost = res.data.data;
 
         const xhr = new XMLHttpRequest();
-        const fileExt = productImage.substring(
-          productImage.lastIndexOf(".") + 1
-        );
+
         xhr.addEventListener("load", (event) => handleUploadComplete(event));
         xhr.upload.addEventListener("progress", handleUploadProgress);
         const formData = new FormData();
-        formData.append("file", {
-          uri: productImage,
-          type: `image/${fileExt}`,
-          name: `new__profile.${fileExt}`,
-        });
+        if (productImage) {
+          const fileExt =
+            productImage &&
+            productImage.substring(productImage.lastIndexOf(".") + 1);
+          formData.append("file", {
+            uri: productImage,
+            type: `image/${fileExt}`,
+            name: `new__profile.${fileExt}`,
+          });
+        }
         xhr.open("PUT", `${api}/api/v1/goods/${newPost._id}/upload-photo`);
         xhr.send(formData);
       });

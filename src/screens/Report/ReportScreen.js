@@ -253,29 +253,6 @@ const ReportScreen = () => {
             </Text>
           </TouchableOpacity>
           {/* 10.Нэгдсэн тайлан end */}
-          {/* 11.Бүх тайлан */}
-          <TouchableOpacity
-            onPress={() => navigation.navigate("AllStaticScreen")}
-            style={{
-              backgroundColor: "#175E26",
-              padding: 5,
-              marginTop: 10,
-              marginHorizontal: 10,
-              borderRadius: 10,
-            }}
-          >
-            <Text
-              style={{
-                color: "white",
-                padding: 5,
-                textAlign: "center",
-                fontWeight: "bold",
-              }}
-            >
-              Бүх тайлан
-            </Text>
-          </TouchableOpacity>
-          {/* 11.Бүх тайлан end */}
         </View>
       ) : (
         <PaymentScreen />

@@ -4,7 +4,9 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
 import { Table, Row } from "react-native-table-component";
 import { api } from "../../../Constants";
-
+import * as Print from "expo-print";
+import MyButton from "../../components/MyButton";
+import { shareAsync } from "expo-sharing";
 const LoanStaticScreen = () => {
   const [data, setData] = useState([]);
   const navigation = useNavigation();
@@ -24,9 +26,9 @@ const LoanStaticScreen = () => {
   }, []);
   const header = {
     tableHead: [
-      "Зээлдэгчийн нэр",
-      "Зээлдэгчийн утас",
-      "Зээлсэн хэмжээ",
+      "Бэлтгэн нийлүүлэгчийн нэр",
+      "Бэлтгэн нийлүүлэгчийн дугаар",
+      "3ээлсэн барааны тоо хэмжээ",
       "Зээлсэн он сар",
       "Зээл буцаан төлөх",
       "Төлсөн эсэх",
@@ -34,6 +36,72 @@ const LoanStaticScreen = () => {
     widthArr: [120, 120, 120, 120, 120, 120],
   };
   const state = header;
+  const createDynamicData = () => {
+    var datas = "";
+    for (let i in data) {
+      const item = data[i];
+      datas =
+        datas +
+        `<tr>
+        <td>${item[0] ? item[0] : ""}</td>
+        <td>${item[1] ? item[1] : ""}</td>
+        <td>${item[2] ? item[2] : ""}</td>
+        <td>${item[3] ? item[3] : ""}</td>
+        <td>${item[4] ? item[4] : ""}</td>
+        <td>${item[5] ? item[5] : ""}</td>
+      </tr>`;
+    }
+
+    const html = `
+    <html>
+    <head>
+    <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #A9A9A9;
+      text-align: center;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+    </head>
+    <body>
+    
+    <img width="20%" src="${api}/upload/8alogo.png" alt="">
+    <h2>Зээлийн тайлан</h2>
+    <table style="width:100%">
+      <tr>
+<th>Бэлтгэн нийлүүлэгчийн нэр</th>
+<th>Бэлтгэн нийлүүлэгчийн дугаар</th>
+<th>3ээлсэн барааны тоо хэмжээ</th>
+<th>Зээлсэн он сар</th>
+<th>Зээл буцаан төлөх</th>
+<th>Төлсөн эсэх</th>
+      </tr>
+      ${datas}
+     
+    </table>
+    
+    </body>
+    </html>
+    `;
+    return html;
+  };
+  const printToFile = async () => {
+    // On iOS/android prints the given html. On web prints the HTML from the current page.
+    const { uri } = await Print.printToFileAsync({
+      html: createDynamicData(),
+    });
+    await shareAsync(uri, { UTI: ".pdf", mimeType: "application/pdf" });
+  };
   return (
     <View style={styles.container}>
       <ScrollView horizontal={true}>
@@ -72,6 +140,7 @@ const LoanStaticScreen = () => {
           </ScrollView>
         </View>
       </ScrollView>
+      <MyButton onPress={printToFile} />
     </View>
   );
 };
