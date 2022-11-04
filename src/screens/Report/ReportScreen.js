@@ -207,7 +207,7 @@ const ReportScreen = () => {
           {/* 8.Борлуулалт төсөөллийн нэгдсэн тайлан end*/}
           {/* 9.Тооллогын тайлан шинээр хийнэ !!! */}
           {/* <TouchableOpacity
-            onPress={() => navigation.navigate("ReceivableStaticScreen")}
+            onPress={() => navigation.navigate("InventoryScreen")}
             style={{
               backgroundColor: "#175E26",
               padding: 5,
@@ -229,7 +229,7 @@ const ReportScreen = () => {
           </TouchableOpacity> */}
           {/* 9.Тооллогын тайлан тайлан end*/}
           {/* 10.Нэгдсэн тайлан */}
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() =>
               navigation.navigate("ChooseModal", { type: "AllReport" })
             }
@@ -251,7 +251,7 @@ const ReportScreen = () => {
             >
               Нэгдсэн тайлан
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           {/* 10.Нэгдсэн тайлан end */}
         </View>
       ) : (

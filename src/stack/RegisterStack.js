@@ -4,6 +4,7 @@ import MyBackButton from "../components/MyBackButton";
 import ResetPassword2 from "../screens/Auth/ResetPassword2";
 import DateExtendScreen from "../screens/Payment/DateExtendScreen";
 import QpayModal from "../screens/Payment/QpayModal";
+import InventoryBarcodeScanner from "../screens/Register/InventoryBarcodeScanner";
 import RegisterScreen from "../screens/Register/RegisterScreen";
 const RegisterStack = () => {
   const RegisterStack = createNativeStackNavigator();
@@ -33,6 +34,15 @@ const RegisterStack = () => {
         component={DateExtendScreen}
         options={{
           presentation: "formSheet",
+          title: "Хугацаа сунгах",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <RegisterStack.Screen
+        name="InventoryBarcodeScanner"
+        component={InventoryBarcodeScanner}
+        options={{
+          // presentation: "formSheet",
           title: "Хугацаа сунгах",
           headerLeft: () => <MyBackButton />,
         }}

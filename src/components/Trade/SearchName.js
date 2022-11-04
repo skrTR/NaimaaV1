@@ -4,14 +4,14 @@ import { api } from "../../../Constants";
 import { useIsFocused } from "@react-navigation/native";
 
 const SearchName = (props) => {
-  const { setFilterData, search, setSearch } = props;
+  const { setFilterData, search, setSearch, refresh } = props;
   const [masterData, setMasterData] = useState([]);
 
   const isFocused = useIsFocused();
   useEffect(() => {
     fetchCompany();
     return () => {};
-  }, [isFocused]);
+  }, [isFocused, refresh]);
   const fetchCompany = () => {
     const apiURL = `${api}/api/v1/goods/user?limit=100`;
     fetch(apiURL)

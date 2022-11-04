@@ -39,6 +39,7 @@ export const UserStore = (props) => {
       })
       .catch((err) => {
         loginFailed(err.message);
+        console.log(err.message);
 
         let message = err.response.data.error.message;
 

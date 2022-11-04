@@ -1,11 +1,21 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Modal,
+  Text,
+  TextInput,
+} from "react-native";
+import React, { useState } from "react";
 import { DataTable } from "react-native-paper";
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import { api } from "../../../Constants";
 
 const BasketTable = ({ basket, setRefresh }) => {
+  const [priceModal, setPriceModal] = useState(false);
+  const [price, setPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
   const removeBasket = (id) => {
     axios
       .delete(`${api}/api/v1/transactions/${id}`)
@@ -16,8 +26,28 @@ const BasketTable = ({ basket, setRefresh }) => {
         // console.log(err);
       });
   };
+  const editBasket = (id) => {
+    axios
+      .put(`${api}/api/v1/transactions/${id}`, {
+        price: price,
+        quantity: quantity,
+      })
+      .then((res) => {
+        setRefresh(true);
+        setPriceModal(!priceModal);
+      })
+      .catch((err) => {
+        // console.log(err);
+        setPriceModal(!priceModal);
+      });
+  };
+  const changed = (prices, quantitys) => {
+    setPrice(prices);
+    setQuantity(quantitys);
+    setPriceModal(true);
+  };
   return (
-    <DataTable>
+    <DataTable style={{ opacity: priceModal ? 0.2 : 1 }}>
       <DataTable.Header>
         <DataTable.Title textStyle={{ fontSize: 14 }}>
           Барааны нэр
@@ -65,9 +95,12 @@ const BasketTable = ({ basket, setRefresh }) => {
                         alignItems: "center",
                         marginLeft: 5,
                       }}
+                      onPress={() => {
+                        changed(e.price, e.quantity);
+                      }}
                     >
                       <FontAwesome
-                        name="angle-double-right"
+                        name="pencil-square-o"
                         size={20}
                         color="white"
                       />
@@ -76,6 +109,80 @@ const BasketTable = ({ basket, setRefresh }) => {
                 </DataTable.Cell>
               </DataTable.Row>
             )}
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={priceModal}
+              onRequestClose={() => {
+                setPriceModal(!priceModal);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={{ fontWeight: "bold", fontSize: 18 }}>Үнэ</Text>
+                  <TextInput
+                    placeholder="Үнэ"
+                    keyboardType="numeric"
+                    style={{
+                      borderWidth: 1,
+                      padding: 3,
+                      borderColor: "#CCCCCC",
+                      fontSize: 16,
+                    }}
+                    placeholderTextColor={"grey"}
+                    // value={codePrice.price && codePrice.price.toString()}
+                    // onChangeText={checkPrice}
+                    value={price.toString()}
+                    onChangeText={setPrice}
+                  />
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: 16,
+                      marginTop: 10,
+                      fontSize: 18,
+                    }}
+                  >
+                    Хэмжээ
+                  </Text>
+                  <TextInput
+                    placeholder="Хэмжээ"
+                    style={{
+                      borderWidth: 1,
+                      padding: 3,
+                      borderColor: "#CCCCCC",
+                      fontSize: 16,
+                    }}
+                    placeholderTextColor={"grey"}
+                    value={quantity.toString()}
+                    onChangeText={setQuantity}
+                  />
+
+                  <TouchableOpacity
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => {
+                      // BasketData(e._id, e.price, e.quantity, e.name);
+
+                      editBasket(e._id);
+                    }}
+                  >
+                    <Text style={[styles.textStyle, { fontSize: 18 }]}>
+                      Болсон
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => setPriceModal(!priceModal)}
+                    style={{ position: "absolute", padding: 20, right: 0 }}
+                  >
+                    <Ionicons
+                      name="backspace-outline"
+                      size={24}
+                      color="black"
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
           </View>
         );
       })}
@@ -85,4 +192,53 @@ const BasketTable = ({ basket, setRefresh }) => {
 
 export default BasketTable;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  productText: {
+    fontWeight: "bold",
+    fontSize: 15,
+  },
+  productText1: {
+    color: "grey",
+    marginTop: 10,
+  },
+  borderLine: {
+    borderWidth: 0.45,
+    borderColor: "#CCCCCC",
+    marginVertical: 5,
+  },
+  linedCenter: {
+    alignItems: "center",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginTop: 10,
+  },
+  buttonClose: {
+    backgroundColor: "#175E26",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+});

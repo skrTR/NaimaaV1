@@ -8,6 +8,7 @@ import AllReportScreen from "../screens/Report/AllReportScreen";
 import BillDetailScreen from "../screens/Report/BillDetailScreen";
 import BoughtRemainderScreen from "../screens/Report/BoughtRemainderScreen";
 import IncomeStaticScreen from "../screens/Report/IncomeStaticScreen";
+import InventoryScreen from "../screens/Report/InventoryScreen";
 import LoanInfoModal from "../screens/Report/LoanInfoModal";
 import LoanStaticScreen from "../screens/Report/LoanStaticScreen";
 import ChooseCategoryModal from "../screens/Report/Modal/ChooseCategoryModal";
@@ -191,6 +192,15 @@ const ReportStack = () => {
         options={{
           presentation: "formSheet",
           title: "Борлуулалт төсөөллийн нэгдсэн тайлан",
+          headerLeft: () => <MyBackButton />,
+        }}
+      />
+      <ReportStack.Screen
+        name="InventoryScreen"
+        component={InventoryScreen}
+        options={{
+          presentation: "formSheet",
+          title: "Тооллогын тайлан",
           headerLeft: () => <MyBackButton />,
         }}
       />

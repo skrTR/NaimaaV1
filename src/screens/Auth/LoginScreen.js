@@ -45,8 +45,8 @@ const LoginScreen = () => {
                   placeholderTextColor={"black"}
                   value={phone}
                   onChangeText={setPhone}
-                  style={{ fontSize: 16 }}
                   keyboardType={"number-pad"}
+                  style={{ fontSize: 16 }}
                 />
                 <View
                   style={{

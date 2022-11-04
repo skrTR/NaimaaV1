@@ -124,7 +124,7 @@ const AllReportScreen = (props) => {
               data={["Эхний үлдэгдэл", "Ашигын тайлан", "Нийт үлдэгдэл"]}
               style={styles.header1}
               textStyle={styles.text}
-              widthArr={[340, 260, 340]}
+              widthArr={[240, 360, 340]}
             />
             <Row
               data={state.tableHead}

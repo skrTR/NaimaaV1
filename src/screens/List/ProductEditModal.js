@@ -237,7 +237,7 @@ const ProductEditModal = (props) => {
           placeholder="Үнийн дүнгээ бичнэ үү"
           placeholderTextColor={"grey"}
           style={{ borderWidth: 1, padding: 5 }}
-          value={productPrice.toString()}
+          value={`${productPrice}`}
           onChangeText={setProductPrice}
         />
         <Text style={styles.titleText}>Хэмжих нэгж</Text>
@@ -349,6 +349,7 @@ const ProductEditModal = (props) => {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         scanned={scanned}
+        setScanned={setScanned}
       />
       {/* Camera type modal */}
       <CameraModal

@@ -13,6 +13,9 @@ import { shareAsync } from "expo-sharing";
 import * as Print from "expo-print";
 import MyButton from "../../components/MyButton";
 import { api } from "../../../Constants";
+import MyButton2 from "../../components/MyButton2";
+import * as XLSX from "xlsx";
+import * as FileSystem from "expo-file-system";
 const TransactionReport = (props) => {
   const { data, startDate, endDate } = props.route.params;
   const navigation = useNavigation();
@@ -21,6 +24,7 @@ const TransactionReport = (props) => {
     widthArr: [100, 90, 90, 100, 100],
   };
   const state = header;
+  // convert pdf
   const createDynamicData = () => {
     var datas = "";
     for (let i in data) {
@@ -95,6 +99,24 @@ const TransactionReport = (props) => {
     });
     await shareAsync(uri, { UTI: ".pdf", mimeType: "application/pdf" });
   };
+  // conver excel
+  const generateExcel = () => {
+    let newData = data;
+    newData.map((e) => {
+      e.pop();
+    });
+    newData.unshift(["Нэр", "Тоо хэмжээ", "Дүн", "Тоо хэмжээ", "Дүн"]);
+    let wb = XLSX.utils.book_new();
+    let ws = XLSX.utils.aoa_to_sheet(newData);
+    XLSX.utils.book_append_sheet(wb, ws, "MyFirstSheet", true);
+    const base64 = XLSX.write(wb, { type: "base64" });
+    const filename = FileSystem.documentDirectory + "TransactionReport.xlsx";
+    FileSystem.writeAsStringAsync(filename, base64, {
+      encoding: FileSystem.EncodingType.Base64,
+    }).then(() => {
+      shareAsync(filename);
+    });
+  };
   return (
     <View style={styles.container}>
       <ScrollView horizontal={true}>
@@ -150,6 +172,8 @@ const TransactionReport = (props) => {
         </View>
       </ScrollView>
       <MyButton onPress={printToFile} />
+      <View style={{ marginVertical: 5 }} />
+      <MyButton2 onPress={generateExcel} />
     </View>
   );
 };

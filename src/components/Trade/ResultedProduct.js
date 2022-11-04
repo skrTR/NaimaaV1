@@ -53,7 +53,14 @@ const ResultedProduct = (props) => {
         {barcodeData &&
           barcodeData.map((e, index) => {
             return (
-              <View key={e._id}>
+              <TouchableOpacity
+                key={e._id}
+                onPress={() =>
+                  navigation.navigate("ProductDetailScreen", {
+                    id: e._id,
+                  })
+                }
+              >
                 <DataTable.Row>
                   <DataTable.Cell textStyle={{ fontSize: 16 }}>
                     {e.name}
@@ -224,7 +231,7 @@ const ResultedProduct = (props) => {
                     </View>
                   </View>
                 </Modal>
-              </View>
+              </TouchableOpacity>
             );
           })}
       </DataTable>

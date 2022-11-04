@@ -10,11 +10,14 @@ import React, { useState } from "react";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import { api } from "../../../Constants";
+import DatePicker from "react-native-modern-datepicker";
+
 const PackageModal = (props) => {
   const { loanModal, setLoanModal, id } = props;
   const [isLoan, setIsLoan] = useState(1);
   const [isSum, setIsSum] = useState(false);
   const [loanName, setLoanName] = useState("Жак");
+  const [selectedDate, setSelectedDate] = useState("");
   const [loanPhone, setLoanPhone] = useState("99110401");
   const [loanSize, setLoanSize] = useState("1500");
   const [loanDate, setLoanDate] = useState("2022-08-01");
@@ -118,7 +121,7 @@ const PackageModal = (props) => {
                 size={24}
                 color="black"
               />
-              <Text>Бэлэнээр</Text>
+              <Text>Бэлнээр</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
@@ -219,6 +222,7 @@ const PackageModal = (props) => {
               >
                 Зээл төлөх хугацаа
               </Text>
+              {/* <DatePicker onSelectedChange={(date) => setSelectedDate(date)} /> */}
               <TextInput
                 placeholder="Зээл төлөх хугацаа"
                 style={{

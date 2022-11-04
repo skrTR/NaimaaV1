@@ -15,7 +15,6 @@ import {
 } from "@expo/vector-icons";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { useNavigation } from "@react-navigation/native";
-import { DataTable } from "react-native-paper";
 const IncomeBarCodeSearch = (props) => {
   const { setBarcodeModal, barcodeModal } = props;
   const [hasPermission, setHasPermission] = useState(null);

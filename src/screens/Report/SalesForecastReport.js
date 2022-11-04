@@ -7,6 +7,9 @@ import { shareAsync } from "expo-sharing";
 import * as Print from "expo-print";
 import MyButton from "../../components/MyButton";
 import { api } from "../../../Constants";
+import MyButton2 from "../../components/MyButton2";
+import * as XLSX from "xlsx";
+import * as FileSystem from "expo-file-system";
 const SalesForecastReport = (props) => {
   const { data, startDate, endDate } = props.route.params;
   const navigation = useNavigation();
@@ -105,6 +108,31 @@ const SalesForecastReport = (props) => {
     });
     await shareAsync(uri, { UTI: ".pdf", mimeType: "application/pdf" });
   };
+  const generateExcel = () => {
+    let newData = data;
+    newData.map((e) => {
+      e.pop();
+    });
+    newData.unshift([
+      "Бараа бүтээгдэхүүний нэр төрөл",
+      "Тоо ширхэг",
+      "Нэгжийн дундаж өртөг",
+      "Нийт үнэ",
+      "Борлуулсан барааны дундаж үнэ",
+      "Төсөөллийн борлуулалт /дундаж үнээр/",
+      "Төсөөллийн ашиг",
+    ]);
+    let wb = XLSX.utils.book_new();
+    let ws = XLSX.utils.aoa_to_sheet(newData);
+    XLSX.utils.book_append_sheet(wb, ws, "MyFirstSheet", true);
+    const base64 = XLSX.write(wb, { type: "base64" });
+    const filename = FileSystem.documentDirectory + "SalesForecastReport.xlsx";
+    FileSystem.writeAsStringAsync(filename, base64, {
+      encoding: FileSystem.EncodingType.Base64,
+    }).then(() => {
+      shareAsync(filename);
+    });
+  };
   return (
     <View style={styles.container}>
       <ScrollView horizontal={true}>
@@ -159,6 +187,8 @@ const SalesForecastReport = (props) => {
         </View>
       </ScrollView>
       <MyButton onPress={printToFile} />
+      <View style={{ marginVertical: 5 }} />
+      <MyButton2 onPress={generateExcel} />
     </View>
   );
 };

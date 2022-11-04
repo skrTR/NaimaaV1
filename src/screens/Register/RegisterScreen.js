@@ -114,6 +114,29 @@ const RegisterScreen = () => {
       </Text>
       {/* Hereglegchiin huviin medeelel duusah */}
       {/* Holboo barih */}
+      {/* <TouchableOpacity
+        onPress={() => navigation.navigate("InventoryBarcodeScanner")}
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          marginHorizontal: 10,
+          alignContent: "center",
+          marginBottom: 5,
+        }}
+      >
+        <Ionicons name="add" size={28} color="black" />
+        <Text style={{ fontWeight: "600", fontSize: 16 }}>Тооллого хийх</Text>
+      </TouchableOpacity> */}
+
+      <View
+        style={{
+          borderWidth: 1,
+          borderColor: "#cccccccc",
+          marginHorizontal: 10,
+          marginBottom: 10,
+        }}
+      />
+      {/* Holboo barih */}
       <TouchableOpacity
         onPress={() => Linking.openURL("tel://+976 96660971 ")}
         style={{

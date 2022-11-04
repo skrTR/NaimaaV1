@@ -295,7 +295,7 @@ const AddProductModal = () => {
           placeholder="Үнийн дүнгээ бичнэ үү"
           placeholderTextColor={"grey"}
           style={{ borderWidth: 1, padding: 5, fontSize: 16 }}
-          value={productPrice.toString()}
+          value={`${productPrice}`}
           onChangeText={setProductPrice}
         />
         <Text style={styles.titleText}>Хэмжих нэгж</Text>

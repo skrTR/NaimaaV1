@@ -97,6 +97,7 @@ const IncomeScreen = () => {
                 setFilterData={setFilterData}
                 search={search}
                 setSearch={setSearch}
+                refresh={refresh}
               />
               {/* Search by photo */}
               <TouchableOpacity
@@ -164,6 +165,7 @@ const IncomeScreen = () => {
               <BasketTable basket={basket} setRefresh={setRefresh} />
             </View>
           )}
+          <View style={{ marginBottom: 500 }} />
         </ScrollView>
         {basket.length > 0 && (
           <TouchableOpacity
@@ -179,7 +181,9 @@ const IncomeScreen = () => {
               borderRadius: 10,
               marginBottom: 10,
             }}
-            onPress={() => setIncomeModal(true)}
+            onPress={() => {
+              setIncomeModal(true);
+            }}
           >
             <Text style={{ color: "white", fontSize: 18 }}>Орлого авах</Text>
           </TouchableOpacity>

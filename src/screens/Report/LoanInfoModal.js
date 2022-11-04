@@ -2,7 +2,7 @@ import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "../../../Constants";
-import { EvilIcons, Entypo } from "@expo/vector-icons";
+import { EvilIcons,  } from "@expo/vector-icons";
 import HalfLoanModal from "./HalfLoanModal";
 import moment from "moment";
 const LoanInfoModal = (props) => {

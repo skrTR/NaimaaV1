@@ -1,13 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
 import { Table, Row } from "react-native-table-component";
 import { api } from "../../../Constants";
 import { shareAsync } from "expo-sharing";
 import * as Print from "expo-print";
 import MyButton from "../../components/MyButton";
+import MyButton2 from "../../components/MyButton2";
+import * as XLSX from "xlsx";
+import * as FileSystem from "expo-file-system";
 const BoughtRemainderScreen = (props) => {
   const { data, startDate, endDate } = props.route.params;
   const navigation = useNavigation();
@@ -107,6 +109,33 @@ const BoughtRemainderScreen = (props) => {
     });
     await shareAsync(uri, { UTI: ".pdf", mimeType: "application/pdf" });
   };
+  // conver excel
+  const generateExcel = () => {
+    let newData = data;
+    newData.map((e) => {
+      e.pop();
+    });
+    newData.unshift([
+      "Бараа материалын нэр төрөл",
+      "Тоо хэмжээ",
+      "Нийт өртөг",
+      "Нэгжийн дундаж өртөг",
+      "Тоо хэмжээ",
+      "Нийт өртөг",
+      "Тоо хэмжээ",
+      "Нийт өртөг",
+    ]);
+    let wb = XLSX.utils.book_new();
+    let ws = XLSX.utils.aoa_to_sheet(newData);
+    XLSX.utils.book_append_sheet(wb, ws, "MyFirstSheet", true);
+    const base64 = XLSX.write(wb, { type: "base64" });
+    const filename = FileSystem.documentDirectory + "BoughtRemainder.xlsx";
+    FileSystem.writeAsStringAsync(filename, base64, {
+      encoding: FileSystem.EncodingType.Base64,
+    }).then(() => {
+      shareAsync(filename);
+    });
+  };
   return (
     <View style={styles.container}>
       <ScrollView horizontal={true}>
@@ -166,6 +195,8 @@ const BoughtRemainderScreen = (props) => {
         </View>
       </ScrollView>
       <MyButton onPress={printToFile} />
+      <View style={{ marginVertical: 5 }} />
+      <MyButton2 onPress={generateExcel} />
     </View>
   );
 };

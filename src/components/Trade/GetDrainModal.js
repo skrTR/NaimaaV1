@@ -10,6 +10,7 @@ import {
 import React, { useState } from "react";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import axios from "axios";
+import DatePicker from "react-native-modern-datepicker";
 import { api } from "../../../Constants";
 const GetDrainModal = (props) => {
   const { drainModal, setDrainModal, setRefresh } = props;
@@ -20,6 +21,7 @@ const GetDrainModal = (props) => {
   const [loanSize, setLoanSize] = useState("");
   const [loanDate, setLoanDate] = useState("");
   const [templateName, setTemplateName] = useState("");
+  const [picker, setPicker] = useState(false);
   const postIncome = () => {
     if (isTemplate) {
       axios
@@ -130,7 +132,7 @@ const GetDrainModal = (props) => {
                   fontWeight: isLoan === 1 ? "700" : "500",
                 }}
               >
-                Бэлэнээр{" "}
+                Бэлнээр{" "}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -282,17 +284,23 @@ const GetDrainModal = (props) => {
               >
                 3ээл төлөх хугацаа
               </Text>
-              <TextInput
-                placeholder="3ээл төлөх хугацаа"
-                style={{
-                  borderWidth: 1,
-                  padding: 3,
-                  borderColor: "#CCCCCC",
-                }}
-                placeholderTextColor={"grey"}
-                value={loanDate}
-                onChangeText={setLoanDate}
-              />
+              {!picker ? (
+                <DatePicker
+                  onSelectedChange={(date) => {
+                    setLoanDate(date);
+                    setPicker(true);
+                  }}
+                  mode="calendar"
+                  style={{ borderRadius: 10 }}
+                />
+              ) : (
+                <TouchableOpacity
+                  onPress={() => setPicker(!picker)}
+                  style={{ borderWidth: 1, padding: 3, borderColor: "#CCCCCC" }}
+                >
+                  <Text>{loanDate}</Text>
+                </TouchableOpacity>
+              )}
             </View>
           )}
           <TouchableOpacity
