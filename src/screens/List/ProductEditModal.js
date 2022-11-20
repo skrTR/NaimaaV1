@@ -62,19 +62,17 @@ const ProductEditModal = (props) => {
       .put(`${api}/api/v1/goods/${data._id}`, {
         name: productName,
         category: categoryId,
-        price: productPrice,
         barCode: barcode,
         unit: productQuantity,
+        // price: productPrice,
       })
       .then((res) => {
-        const newPost = res.data.data;
-
-        const xhr = new XMLHttpRequest();
-
-        xhr.addEventListener("load", (event) => handleUploadComplete(event));
-        xhr.upload.addEventListener("progress", handleUploadProgress);
-        const formData = new FormData();
         if (productImage) {
+          const newPost = res.data.data;
+          const xhr = new XMLHttpRequest();
+          xhr.addEventListener("load", (event) => handleUploadComplete(event));
+          xhr.upload.addEventListener("progress", handleUploadProgress);
+          const formData = new FormData();
           const fileExt =
             productImage &&
             productImage.substring(productImage.lastIndexOf(".") + 1);
@@ -83,9 +81,11 @@ const ProductEditModal = (props) => {
             type: `image/${fileExt}`,
             name: `new__profile.${fileExt}`,
           });
+          xhr.open("PUT", `${api}/api/v1/goods/${newPost._id}/upload-photo`);
+          xhr.send(formData);
         }
-        xhr.open("PUT", `${api}/api/v1/goods/${newPost._id}/upload-photo`);
-        xhr.send(formData);
+        Alert.alert("Amjiltai");
+        navigation.goBack();
       });
   };
 
@@ -150,7 +150,7 @@ const ProductEditModal = (props) => {
     });
   };
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return <Text>Requesting for camera permission!</Text>;
   }
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
@@ -232,14 +232,14 @@ const ProductEditModal = (props) => {
           value={productName}
           onChangeText={setProductName}
         />
-        <Text style={styles.titleText}>Үнэ</Text>
+        {/* <Text style={styles.titleText}>Үнэ</Text>
         <TextInput
           placeholder="Үнийн дүнгээ бичнэ үү"
           placeholderTextColor={"grey"}
           style={{ borderWidth: 1, padding: 5 }}
           value={`${productPrice}`}
           onChangeText={setProductPrice}
-        />
+        /> */}
         <Text style={styles.titleText}>Хэмжих нэгж</Text>
         <TouchableOpacity
           style={{
@@ -265,14 +265,14 @@ const ProductEditModal = (props) => {
             style={{ right: 5 }}
           />
         </TouchableOpacity>
-        <Text style={styles.titleText}>Тоо ширхэг</Text>
+        {/* <Text style={styles.titleText}>Тоо ширхэг</Text>
         <TextInput
           placeholder="Тоо ширхэг"
           placeholderTextColor={"grey"}
           style={{ borderWidth: 1, padding: 5 }}
           value={quantity.toString()}
           onChangeText={setQuantity}
-        />
+        /> */}
         <Text style={styles.titleText}>Тэмдэглэл</Text>
         <TextInput
           multiline
